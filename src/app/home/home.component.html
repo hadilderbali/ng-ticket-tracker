@@ -1,0 +1,27 @@
+<p>home works!</p>
+
+{{title}}
+<!-- Interpolation -->
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>name</th>
+        <th>Age</th>
+    </tr>
+    <tr *ngFor="let u of listusers">
+        <td>{{u.id}}</td>
+        <td>{{u.name}}</td>
+        <td>{{u.age}}</td>
+</table>
+
+<!-- Event Binding -->
+
+<input type="submit" value="hi" (click)="msg()">
+
+<!-- Property Binding -->
+
+<div [style.color]="color">Property</div>
+
+<!-- Two way binding -->
+
+<input class="form-control" type="text" [(ngModel)]="color">
