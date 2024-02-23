@@ -1,0 +1,34 @@
+<p>
+    Formcontrol</p>
+
+
+<label>Login</label>
+<input type="text" placeholder="login" [formControl]="login">
+<label>Password</label>
+<input type="text" placeholder="password" [formControl]="pwd">
+<input type="submit" value="save" (click)="save()" [disabled]="login.invalid||pwd.invalid">
+
+
+
+<p>FormGroup</p>
+
+<form class="form-group" [formGroup]="registerForm">
+
+    <label>Cin</label>
+    <input class="form-control" type="text" placeholder="cin" formControlName="cin">
+
+    <div class="alert alert-danger" *ngIf="this.registerForm.controls['cin'].invalid && this.registerForm.controls['cin'].touched">
+        <div *ngIf="this.registerForm.controls['cin'].hasError('required')"> Cin est obligatoire</div>
+        <div *ngIf="this.registerForm.controls['cin'].hasError('pattern')"> Cin doit etre 8 chiffres </div>
+    </div>
+
+    <label>Name</label>
+    <input class="form-control" type="text" placeholder="name" formControlName="name">
+    <label>Email</label>
+    <input class="form-control" type="text" placeholder="email" formControlName="email">
+    <label>Password</label>
+    <input class="form-control" type="text" placeholder="password" formControlName="password">
+    <input class="btn btn-info" type="submit" value="save" (click)="save()" [disabled]="registerForm.invalid">
+
+
+</form>
