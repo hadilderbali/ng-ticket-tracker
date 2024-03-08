@@ -6,13 +6,17 @@ import { ResidenceComponent } from './residence/residence.component';
 import { ReactiveComponent } from './reactive/reactive.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { DetailProductComponent } from './detail-product/detail-product.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { UpdateProductComponent } from './update-product/update-product.component';
 
 const routes: Routes = [
   {path:'home',component:HomeComponent},
   {path:'product',component:ProductComponent},
   {path:'residence',component:ResidenceComponent},
   {path:'form', component:ReactiveComponent},
+  {path:'addProduct', component:AddProductComponent},
   {path:'detail/:id', component:DetailProductComponent},
+  {path:'updateP/:id', component:UpdateProductComponent},
   //route par defaut
   {path:'',redirectTo:'/home',pathMatch:'full'},
   //route NotFound

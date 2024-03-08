@@ -20,6 +20,12 @@
             <td><button class="btn btn-info" (click)="increment(i)">like</button></td>
             <td><button class="btn btn-warning" [disabled]="u.quantity==0" (click)="buy(i)">BUY</button></td>
             <td><button class="btn btn-success" [routerLink]="['/detail',u.id]">Detail</button></td>
+            <td><button class="btn btn-success" (click)="supp(u.id)">delete</button></td>
+            <td>
+                <button class="btn btn-success" [routerLink]="['/updateP',u.id]">update</button></td>
         </ng-container>
     </tr>
 </table>
+
+
+{{x}}

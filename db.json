@@ -1,0 +1,11 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "iphone 12",
+      "price": 500,
+      "quantity": 5,
+      "nbrLike": "5"
+    }
+  ]
+}

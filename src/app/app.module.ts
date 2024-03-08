@@ -10,7 +10,9 @@ import { ResidenceComponent } from './residence/residence.component';
 import { ReactiveComponent } from './reactive/reactive.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { DetailProductComponent } from './detail-product/detail-product.component';
-
+import { AddProductComponent } from './add-product/add-product.component';
+import { HttpClientModule} from '@angular/common/http';
+import { UpdateProductComponent } from './update-product/update-product.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,13 +21,16 @@ import { DetailProductComponent } from './detail-product/detail-product.componen
     ResidenceComponent,
     ReactiveComponent,
     NotFoundComponent,
-    DetailProductComponent
+    DetailProductComponent,
+    AddProductComponent,
+    UpdateProductComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
