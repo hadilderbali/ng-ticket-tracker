@@ -12,7 +12,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { DetailProductComponent } from './detail-product/detail-product.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { HttpClientModule} from '@angular/common/http';
-import { UpdateProductComponent } from './update-product/update-product.component'
+import { UpdateProductComponent } from './update-product/update-product.component';
+import { TvComponent } from './tv/tv.component';
+import { MobileComponent } from './mobile/mobile.component';
+import { CardComponent } from './card/card.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +26,10 @@ import { UpdateProductComponent } from './update-product/update-product.componen
     NotFoundComponent,
     DetailProductComponent,
     AddProductComponent,
-    UpdateProductComponent
+    UpdateProductComponent,
+    TvComponent,
+    MobileComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
