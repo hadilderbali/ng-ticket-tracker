@@ -1,0 +1,48 @@
+<div class="container">
+  <h2>Create Ticket</h2>
+  <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" id="title" class="form-control" formControlName="title">
+      <div *ngIf="ticketForm.controls['title'].invalid && (ticketForm.controls['title'].dirty || ticketForm.controls['title'].touched)">
+        <div *ngIf="ticketForm.controls['title'].errors?.['required']">
+          Title is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea id="description" class="form-control" formControlName="description" rows="3"></textarea>
+      <div *ngIf="ticketForm.controls['description'].invalid && (ticketForm.controls['description'].dirty || ticketForm.controls['description'].touched)">
+        <div *ngIf="ticketForm.controls['description'].errors?.['required']">
+          Description is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="projectId" class="form-label">Project</label>
+      <select id="projectId" class="form-control" formControlName="projectId">
+        <option *ngFor="let project of projects" [value]="project.id">{{ project.nameP }}</option>
+      </select>
+      <div *ngIf="ticketForm.controls['projectId'].invalid && (ticketForm.controls['projectId'].dirty || ticketForm.controls['projectId'].touched)">
+        <div *ngIf="ticketForm.controls['projectId'].errors?.['required']">
+          Project is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="duration" class="form-label">Duration (in hours)</label>
+      <input type="number" id="duration" class="form-control" formControlName="duration">
+      <div *ngIf="ticketForm.controls['duration'].invalid && (ticketForm.controls['duration'].dirty || ticketForm.controls['duration'].touched)">
+        <div *ngIf="ticketForm.controls['duration'].errors?.['required']">
+          Duration is required.
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="ticketForm.invalid">Create Ticket</button>
+  </form>
+</div>

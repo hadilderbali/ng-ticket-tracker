@@ -1,0 +1,43 @@
+<div class="container mt-5">
+    <h2 class="mb-4">Project List</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let project of projects">
+        <div class="card project-card">
+          <div class="card-header ">
+            <h4 class="mb-0">{{ project.nameP }}</h4>
+          </div>
+          <div class="card-body">
+            <p><strong>Description:</strong> {{ project.description }}</p>
+            <p><strong>Created Date:</strong> {{ project.createdDate | date: 'longDate' }}</p>
+  
+            <h5>Teams:</h5>
+            <ul *ngIf="project.teams && project.teams.length; else noTeamsMessage">
+              <li *ngFor="let team of project.teams">
+                {{ team.nameT }}
+              </li>
+            </ul>
+            <ng-template #noTeamsMessage>
+              <p>Still not assigned to a team.</p>
+            </ng-template>
+            <button class="btn btn-primary mt-3" [routerLink]="['/set-team', project.id]">
+                Assign Team
+              </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav aria-label="Page navigation">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link" href="#" (click)="changePage(currentPage - 1)">Previous</a>
+        </li>
+        <li class="page-item" *ngFor="let page of totalPagesArray"
+            [class.active]="currentPage === page">
+          <a class="page-link" href="#" (click)="changePage(page)">{{ page }}</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <a class="page-link" href="#" (click)="changePage(currentPage + 1)">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>

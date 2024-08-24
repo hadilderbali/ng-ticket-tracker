@@ -1,0 +1,103 @@
+/* Container to center and pad the content */
+.container {
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Row styling to ensure proper spacing and alignment */
+.row {
+  margin-bottom: 20px;
+}
+
+/* Styling for date range inputs */
+input[type="date"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Styling for chart headers */
+h2 {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+/* Styling for chart canvases to ensure they fit well */
+canvas {
+  display: block; /* Ensure canvas is block-level to control size */
+  width: 100% !important; /* Use percentage width to fit parent container */
+  height: auto !important; /* Maintain aspect ratio */
+  max-width: 600px; /* Set max-width for medium size */
+  margin: 0 auto; /* Center the canvas */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Optional: Add styling for chart info */
+.chart-info {
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  /* Stack columns vertically on smaller screens */
+  .col-md-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+.chart-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.chart {
+  flex: 1 1 30%; /* Flex-grow, flex-shrink, and flex-basis */
+  margin: 10px;
+  text-align: center;
+}
+
+.chart-doughnut {
+  flex: 1 1 30%; /* Keep the doughnut charts the same width */
+}
+
+.chart-bar {
+  flex: 1 1 45%; /* Make the bar charts wider */
+}
+
+.chart-canvas {
+  width: 100% !important; /* Ensure canvas takes full width */
+  height: 400px !important; /* Set a fixed height for all charts */
+  max-height: 400px; /* Prevent charts from growing larger */
+}
+
+.chart-title {
+  font-size: 1.2rem; /* Slightly larger font for chart titles */
+  color: #555; /* Grey color for the chart titles */
+  margin-bottom: 10px; /* Space below titles */
+}
+
+
+.chart-info {
+  margin-top: 10px; /* Adds space between the chart and the formula */
+  font-size: 0.9em; /* Adjust font size as needed */
+}
+
+#chart-info {
+  margin-top: 20px;
+}
+
+.chart-title {
+  color: grey; /* Change color to grey */
+  font-size: 1.2rem; /* Reduce the font size */
+  margin-bottom: 10px; /* Add some space below the title */
+}
+.instructional-message {
+  font-size: 1rem; /* Font size for the instructional message */
+  color: #333; /* Dark grey color for readability */
+  margin-bottom: 20px; /* Space below the message */
+}

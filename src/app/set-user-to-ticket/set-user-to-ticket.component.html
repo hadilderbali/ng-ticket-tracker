@@ -1,0 +1,47 @@
+<div *ngIf="ticket; else loading">
+    <!-- Ticket Details Section -->
+    <div class="card mb-3">
+      <div class="card-header">
+        <h2>Issue: {{ ticket.title }}</h2>
+      </div>
+      <div class="card-body">
+        <p><strong>Description:</strong> {{ ticket.description }}</p>
+        <p><strong>Status:</strong> {{ ticket.status }}</p>
+        <p><strong>Project:</strong> {{ ticket.project.nameP }}</p>
+        <p><strong>Created Date:</strong> {{ ticket.createdDate | date:'medium' }}</p>
+        <p><strong>Start Date:</strong> {{ ticket.dateS | date:'medium' }}</p>
+        <p><strong>End Date:</strong> {{ ticket.dateF | date:'medium' }}</p>
+        <p><strong>Duration:</strong> {{ ticket.duration }} hours</p>
+      </div>
+    </div>
+  
+  
+<!-- Assign User Section -->
+<div class="card">
+    <div class="card-header">
+      <h3>Assign User to Ticket</h3>
+    </div>
+    <div class="card-body">
+      <label for="assignUser" class="form-label">Select a User:</label>
+      <select id="assignUser" class="form-select" [(ngModel)]="selectedUserId">
+        <option *ngFor="let user of availableUsers" [value]="user.userid">
+          {{ user.username }}
+        </option>
+      </select>
+      <button class="btn btn-primary mt-3" (click)="assignUser()">Assign User</button>
+    </div>
+  </div>
+  
+    <!-- Success Message -->
+    <div *ngIf="successMessage" class="alert alert-success mt-3">
+      {{ successMessage }}
+    </div>
+  </div>
+  
+  <!-- Loading or Error Handling Section -->
+  <ng-template #loading>
+    <div class="alert alert-warning">
+      Ticket is loading or not found.
+    </div>
+  </ng-template>
+  

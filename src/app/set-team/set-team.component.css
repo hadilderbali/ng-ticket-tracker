@@ -1,0 +1,112 @@
+/* General Styles */
+.set-team-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Card Styles */
+  .card {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .card h3 {
+    margin-top: 0;
+    color: #0056b3;
+  }
+  
+  .card p {
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  /* Project Details Card */
+  .project-details-card {
+    margin-bottom: 30px;
+  }
+  
+  /* Search Team Section */
+  .search-team-section {
+    margin-bottom: 20px;
+  }
+  
+  .search-team-section label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  
+  .search-team-section input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  /* Teams List */
+  .teams-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .team-card {
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .team-card:hover {
+    background-color: #e0f7fa;
+  }
+  
+  .selected-team-details-card {
+    background-color: #e3f2fd;
+  }
+  
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 600px) {
+    .set-team-container {
+      padding: 10px;
+    }
+  
+    .card {
+      padding: 15px;
+    }
+  
+    .btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  

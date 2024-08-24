@@ -1,0 +1,51 @@
+.container {
+    max-width: 1200px; /* Ensure the container width is consistent */
+    margin: 0 auto; /* Center the container */
+  }
+  
+  .card {
+    height: 100%; /* Ensure cards expand to fill their container */
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px; /* Add space between cards */
+  }
+  
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 300px; /* Set a minimum height for uniform card size */
+    border-radius: 8px; /* Optional: for rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: for shadow effect */
+  }
+  
+  .card-header {
+    text-align: center;
+    padding: 1rem; /* Adjust padding for better spacing */
+    background-color: #E0F7FA; /* Ice Blue background color */
+    color: #007bff; /* Adjust text color for contrast */
+    border-bottom: 2px solid #007bff; /* Optional: add a border for more definition */
+  }
+  
+.card-body {
+    padding: 1rem; /* Adjust padding for better spacing */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .card-body p, .card-body ul {
+    margin-bottom: 1rem; /* Add space between paragraphs and lists */
+  }
+  
+  .card-body ul {
+    padding-left: 1rem; /* Add padding for list items */
+  }
+  
+  .card-body h5 {
+    margin-top: 1rem; /* Add space before the teams section */
+  }
+  .row {
+    margin-bottom: 20px; /* Add space between rows of cards */
+  }
+  

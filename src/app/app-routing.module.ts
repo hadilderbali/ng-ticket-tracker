@@ -1,31 +1,37 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { ProductComponent } from './product/product.component';
-import { ResidenceComponent } from './residence/residence.component';
-import { ReactiveComponent } from './reactive/reactive.component';
+
 import { NotFoundComponent } from './not-found/not-found.component';
-import { DetailProductComponent } from './detail-product/detail-product.component';
-import { AddProductComponent } from './add-product/add-product.component';
-import { UpdateProductComponent } from './update-product/update-product.component';
-import { TvComponent } from './tv/tv.component';
-import { MobileComponent } from './mobile/mobile.component';
+import { NotificationComponent } from './notification/notification.component';
+import { HomeComponent } from './home/home.component';
+import { TicketComponent } from './ticket/ticket.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NotificationListComponent } from './notification-list/notification-list.component';
+import { TicketListComponent } from './ticket-list/ticket-list.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
+import { ProjectListComponent } from './project-list/project-list.component';
+import { SetTeamComponent } from './set-team/set-team.component';
+import { TeamListComponent } from './team-list/team-list.component';
+import { TeamDetailsComponent } from './team-details/team-details.component';
+import { CreateTeamComponent } from './create-team/create-team.component';
+import { SetUserToTicketComponent } from './set-user-to-ticket/set-user-to-ticket.component';
+
 
 const routes: Routes = [
-  {path:'home',component:HomeComponent},
-  {path:'product',component:ProductComponent},
-  {path:'residence',component:ResidenceComponent},
-  {path:'form', component:ReactiveComponent},
-  {path:'tv', component:TvComponent},
-  {path:'mobile', component:MobileComponent},
-  {path:'addProduct', component:AddProductComponent},
-  {path:'detail/:id', component:DetailProductComponent},
-  {path:'updateP/:id', component:UpdateProductComponent},
-  //route par defaut
-  {path:'',redirectTo:'/home',pathMatch:'full'},
-  //route NotFound
-  {path:'**',component:NotFoundComponent},
-  //route parametrée
+ 
+  { path: 'affect-user/:ticketId', component: SetUserToTicketComponent },
+  {path:'notification',component:NotificationComponent},
+  {path:'',component:DashboardComponent},
+  {path:'createTicket',component:TicketComponent},
+  {path:'dashboard',component:DashboardComponent},
+  {path:'notificationList',component:NotificationListComponent},
+  {path:'ticketList',component:TicketListComponent},
+  {path:'createProject',component:CreateProjectComponent},
+  {path:'projectList',component:ProjectListComponent},
+  { path: 'set-team/:projectId', component: SetTeamComponent },
+  { path: 'teams', component: TeamListComponent },
+{ path: 'team-details/:teamId',component:TeamDetailsComponent},
+{path:'createTeam',component:CreateTeamComponent},
 
 ];
 

@@ -1,0 +1,36 @@
+/* team-details.component.css */
+
+/* Style for the card title */
+.card-title {
+    font-size: 1.5rem; /* Larger font size for the team name */
+    font-weight: bold; /* Bold font for the team name */
+  }
+  
+  /* Style for info items (e.g., Number of Members) */
+  .info-item {
+    font-size: 1rem; /* Font size for info items */
+    font-weight: bold; /* Bold font for info items */
+    margin-bottom: 1rem; /* Space below info items */
+  }
+  
+  /* Style for section titles (e.g., Projects, Team Members) */
+  .info-title {
+    font-size: 1rem; /* Same font size for section titles */
+    font-weight: bold; /* Bold font for section titles */
+    color: rgb(6, 64, 237); /* Black color for section titles */
+    margin-top: 1rem; /* Space above section titles */
+    margin-bottom: 0.5rem; /* Space below section titles */
+  }
+  
+  /* Style for the info section */
+  .info-section {
+    margin-top: 1rem; /* Space above each info section */
+  }
+  /* team-details.component.css */
+
+/* Style for the back button */
+.btn-primary {
+    background-color: #007bff; /* Primary button color */
+    border-color: #007bff; /* Button border color */
+  }
+  

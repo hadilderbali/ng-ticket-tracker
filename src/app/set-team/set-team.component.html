@@ -1,0 +1,47 @@
+<div class="set-team-container">
+    <h2>Affect Team to Project</h2>
+  
+    <!-- Project Details Card -->
+    <div class="card project-details-card">
+      <h3>Project Details</h3>
+      <p><strong>Project Name:</strong> {{ project.nameP }}</p>
+      <p><strong>Description:</strong> {{ project.description }}</p>
+      <p><strong>Created Date:</strong> {{ project.createdDate | date:'medium' }}</p>
+    </div>
+  
+    <!-- Search Teams -->
+    <div class="search-team-section">
+      <label for="team-search">Search Team:</label>
+      <input type="text" id="team-search" [(ngModel)]="searchQuery" (input)="onSearchTeam()" placeholder="Enter team name">
+    </div>
+  
+    <!-- Teams List -->
+    <div class="teams-list">
+      <div *ngFor="let team of filteredTeams" class="card team-card" (click)="selectTeam(team)">
+        <p><strong>Team Name:</strong> {{ team.nameT }}</p>
+        <p><strong>Members:</strong> {{ team.membreInteger }}</p>
+      </div>
+    </div>
+  
+    <!-- Selected Team Details Card -->
+    <div *ngIf="selectedTeam" class="card selected-team-details-card">
+      <h3>Selected Team Details</h3>
+      <p><strong>Team Name:</strong> {{ selectedTeam.nameT }}</p>
+      <p><strong>Members:</strong> {{ selectedTeam.membreInteger }}</p>
+      
+      <!-- Users associated with the selected team -->
+      <div *ngIf="selectedTeam.users && selectedTeam.users.length > 0">
+        <h4>Team Members:</h4>
+        <ul>
+          <li *ngFor="let user of selectedTeam.users">
+            <p><strong>User Name:</strong>  {{ user.username }}</p>
+            <p><strong>User mail:</strong>  {{ user.usermail}}</p>
+            
+          </li>
+        </ul>
+      </div>
+  
+      <button class="btn btn-primary" (click)="affectTeamToProject()">Affect Team</button>
+    </div>
+  </div>
+  

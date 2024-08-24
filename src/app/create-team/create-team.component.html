@@ -1,0 +1,38 @@
+<div class="container mt-4">
+    <h2>Create Team</h2>
+    <form (ngSubmit)="onSubmit(teamForm)" #teamForm="ngForm">
+      
+      <div class="form-group">
+        <label for="userSearch">Search Users:</label>
+        <input type="text" id="userSearch" (input)="searchUsers($event)" class="form-control" />
+      </div>
+      
+      <div class="form-group">
+        <label for="teamName">Team Name:</label>
+        <input type="text" id="teamName" [(ngModel)]="team.nameT" name="teamName" class="form-control" />
+      </div>
+      
+      <div class="form-group">
+        <label for="teamMembers">Number of Members:</label>
+        <input type="number" id="teamMembers" [(ngModel)]="team.membre" name="teamMembers" class="form-control" />
+      </div>
+      
+      <div class="form-group">
+        <label>Users:</label>
+        <ul>
+          <li *ngFor="let user of filteredUsers">
+            <input type="checkbox" [checked]="team.userIds.includes(user.userid)" (change)="toggleUserSelection(user)" />
+            {{ user.username }}
+          </li>
+        </ul>
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Create Team</button>
+      
+      <!-- Success message -->
+      <div *ngIf="successMessage" class="alert alert-success mt-3">
+        {{ successMessage }}
+      </div>
+    </form>
+  </div>
+  

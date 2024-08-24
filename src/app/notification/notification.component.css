@@ -1,0 +1,85 @@
+.notification-form {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 16px;
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .form-group {
+    margin-bottom: 16px;
+  }
+  
+  .description-group {
+    grid-column: span 2;
+  }
+  
+  textarea {
+    width: 100%;
+    resize: vertical;
+  }
+  
+  .enable-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .enable-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  button[type="button"], button[type="submit"] {
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: none;
+    background-color: #082f7b;
+    color: white;
+  }
+  
+  button[type="button"]:hover, button[type="submit"]:hover {
+    background-color: #218838;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    padding: 8px;
+    border: 1px solid #ddd;
+    margin-bottom: 8px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  li:hover {
+    background-color: #f1f1f1;
+  }
+/* Styles for circular button */
+.btn-rounded {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+/* Styles for the informative message placeholder */
+.form-control::placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+  .text-muted {
+    color: #6c757d;
+  }
+  

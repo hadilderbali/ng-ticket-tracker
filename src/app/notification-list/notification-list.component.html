@@ -1,0 +1,60 @@
+<!-- notification-list.component.html -->
+<div class="notification-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <button (click)="navigateToCompose()" class="compose-button">
+            <i class="fas fa-plus"></i> <!-- FontAwesome icon for compose -->
+            <span>Compose</span>
+        </button>
+<br />
+        <div class="sidebar-item" 
+            (click)="switchCategory('Drafts')"
+            [class.active]="selectedCategory === 'Drafts'"
+        >
+            <i class="fas fa-inbox"></i> <!-- FontAwesome icon for drafts -->
+            <span>Drafts</span>
+        </div>
+        <div class="sidebar-item"
+            (click)="switchCategory('Sent Notifications')"
+            [class.active]="selectedCategory === 'Sent Notifications'"
+        >
+            <i class="fas fa-paper-plane"></i> <!-- FontAwesome icon for sent items -->
+            <span>Sent Notifications</span>
+        </div>
+        
+        <!-- Category Dropdown -->
+        <div class="sidebar-item category-dropdown">
+            <i class="fas fa-filter"></i> <!-- FontAwesome icon for filter -->
+            <span>Categories</span>
+            <i class="fas fa-caret-down" (click)="toggleCategoryDropdown()"></i> <!-- Dropdown icon -->
+            <div *ngIf="dropdownOpen" class="dropdown-menu">
+                <div *ngFor="let category of categories" (click)="selectCategory(category)">
+                    {{ category }}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Email List -->
+    <div class="email-list">
+      <h2>{{selectedCategory}}</h2>
+      <ul>
+        <li *ngFor="let notification of notifications" (click)="selectNotification(notification)">
+          <i class="fas fa-envelope"></i> <!-- Icon for each notification -->
+          <span>{{ notification.description }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Email Reading Pane -->
+    <div class="email-reading-pane" *ngIf="selectedNotification">
+      <h2>{{ selectedNotification.description }}</h2>
+      <p><strong>Date:</strong> {{ selectedNotification.date | date }}</p>
+      <p><strong>Event Type:</strong> {{ selectedNotification.eventType }}</p>
+      <p><strong>Category:</strong> {{ selectedNotification.category }}</p>
+    
+      <button *ngIf="selectedCategory === 'Drafts'" (click)="enableNotification(selectedNotification.idN)">
+        Enable Notification
+      </button>
+    </div>
+  </div>

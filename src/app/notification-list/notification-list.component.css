@@ -1,0 +1,107 @@
+/* notification-list.component.css */
+.notification-container {
+    display: flex;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-right: 1px solid #ddd;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    position: relative;
+}
+
+.sidebar-item i {
+    margin-right: 10px;
+}
+
+.sidebar-item:hover {
+    background-color: #e0e0e0;
+}
+
+.compose-button {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.compose-button i {
+    margin-right: 10px;
+}
+
+.email-list {
+    flex: 1;
+    padding: 10px;
+}
+
+.email-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.email-list li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.email-list li i {
+    margin-right: 10px;
+}
+
+.email-reading-pane {
+    flex: 2;
+    padding: 10px;
+}
+
+.email-reading-pane button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.email-reading-pane button:hover {
+    background-color: #0056b3;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-menu div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown-menu div:hover {
+    background-color: #e0e0e0;
+}

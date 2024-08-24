@@ -1,0 +1,51 @@
+<div class="container">
+  <!-- Instructional Message -->
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <p class="instructional-message">Please select a date range to view the charts for the specified week:</p>
+    </div>
+  </div>
+
+  <!-- Date Range Inputs -->
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <label for="startDate">Start Date</label>
+      <input type="date" id="startDate" [(ngModel)]="selectedStartDate" class="form-control" (change)="onDateChange()" />
+    </div>
+    <div class="col-md-6">
+      <label for="endDate">End Date</label>
+      <input type="date" id="endDate" [(ngModel)]="selectedEndDate" class="form-control" (change)="onDateChange()" />
+    </div>
+  </div>
+
+  <!-- Charts Container -->
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <h2>Charts Overview</h2>
+      <div class="chart-container">
+        <div class="chart chart-doughnut">
+          <h3 class="chart-title">Ticket Status Distribution</h3>
+          <canvas id="statusDistributionChart" class="chart-canvas"></canvas>
+        </div>
+        <div class="chart chart-bar">
+          <h3 class="chart-title">User Capacity and Workload</h3>
+          <canvas id="userCapacityAndWorkloadChart" class="chart-canvas"></canvas>
+          <div class="chart-info">
+            <p><strong>Capacity Formula:</strong></p>
+            <p>Percentage of Capacity = (Total Tickets / Capacity) * 100</p>
+            <p>Workload per Day = Total Ticket Duration / Total Days</p>
+            <p>Remaining Capacity = Total Capacity - Workload</p>
+          </div>
+        </div>
+        <div class="chart chart-bar">
+          <h3 class="chart-title">Average Ticket Duration Resolution</h3>
+          <canvas id="averageDurationChart" class="chart-canvas"></canvas>
+          <div class="chart-info">
+            <p><strong>Average Duration Formula:</strong></p>
+            <p>Average Duration = (Total Duration of Resolved Tickets) / (Number of Resolved Tickets)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <button (click)="navigateToTeam()" class="compose-button">
+    <i class="fas fa-plus"></i> <!-- FontAwesome icon for compose -->
+    <span>Add Team</span>
+</button>
+
+  <div class="row">
+    
+    <!-- Main content -->
+    <div class="col-md-12">
+      <!-- Teams list table -->
+      <table class="table align-middle mb-0 bg-white">
+        <thead class="bg-light">
+          <tr>
+            <th>Team Name</th>
+            <th>Members</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let team of teams">
+            <tr *ngFor="let user of team.users ?? []; let i = index">
+              <td *ngIf="i === 0" [attr.rowspan]="team.users?.length">{{ team.nameT }}</td>
+              <td *ngIf="i === 0" [attr.rowspan]="team.users?.length">{{ team.membreInteger }}</td>
+              <td>{{ user.username }}</td>
+              <td>{{ user.usermail }}</td>
+              <td *ngIf="i === 0" [attr.rowspan]="team.users?.length">
+                <button class="btn btn-primary btn-sm" (click)="viewTeamDetails(team.id)">View Details</button>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

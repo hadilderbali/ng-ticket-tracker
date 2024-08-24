@@ -1,0 +1,44 @@
+<div *ngIf="team; else noTeamMessage">
+    <div class="card mb-4">
+      <!-- Back Button -->
+      <div class="card-header">
+        <button class="btn btn-primary mb-3" (click)="goBack()">Back</button>
+        <h2 class="card-title">{{ team.nameT }}</h2>
+      </div>
+      <div class="card-body">
+        <!-- Number of Members -->
+        <p class="info-item"><strong>Number of Members:</strong> {{ team.membreInteger || 'Not specified' }}</p>
+        
+        <!-- Projects Information -->
+        <div *ngIf="team.projects && team.projects.length > 0" class="info-section">
+          <h4 class="info-title">Projects</h4>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let project of team.projects">
+              {{ project.nameP || 'No project name specified' }}
+            </li>
+          </ul>
+        </div>
+    
+        <!-- Users Information -->
+        <div *ngIf="team.users && team.users.length > 0" class="info-section">
+          <h4 class="info-title">Team Members</h4>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let user of team.users">
+              {{ user.username || 'No name specified' }}
+            </li>
+          </ul>
+        </div>
+    
+        <!-- Display a message if no users are available -->
+        <div *ngIf="!team.users?.length">
+          <p>No team members available.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Template for no team available message -->
+  <ng-template #noTeamMessage>
+    <p>No team available for the given ID.</p>
+  </ng-template>
+  

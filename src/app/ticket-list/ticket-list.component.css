@@ -1,0 +1,43 @@
+/* Badge styling */
+.badge {
+    display: inline-block;
+    padding: 0.35em 0.65em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+    color: #fff;
+  }
+  
+  .badge-secondary { background-color: #6c757d; }
+  .badge-primary { background-color: #007bff; }
+  .badge-warning { background-color: #ffc107;  }
+  .badge-info { background-color: #17a2b8; }
+  .badge-success { background-color: #28a745; }
+  .badge-danger { background-color: #dc3545; }
+  .compose-button {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.compose-button i {
+    margin-right: 10px;
+}
+.btn-sm.btn-rounded {
+  padding: 5px 10px;
+  border-radius: 20px;
+  background-color: #f8f9fa; /* Adjust as needed */
+  border: 1px solid #ced4da; /* Adjust as needed */
+  color: #495057; /* Adjust as needed */
+  font-size: 1.25rem; /* Adjust font size for emoji */
+}

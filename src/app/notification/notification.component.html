@@ -1,0 +1,127 @@
+<!-- Main content -->
+<div class="container mt-4">
+  <form [formGroup]="notificationForm">
+    <!-- Event Type Dropdown -->
+    <div class="mb-3">
+      <label for="eventType" class="form-label">Event Type:</label>
+      <select id="eventType" formControlName="eventType" (change)="onEventTypeChange($event)" class="form-select">
+        <option *ngFor="let type of eventTypes" [value]="type">{{ type }}</option>
+      </select>
+    </div>
+
+    <!-- Description Textarea -->
+    <div class="mb-3">
+      <label for="description" class="form-label">Description:</label>
+      <textarea id="description" formControlName="description" rows="5" class="form-control"></textarea>
+    </div>
+
+    <!-- Category Dropdown -->
+    <div class="mb-3">
+      <label for="category" class="form-label">Category:</label>
+      <select id="category" formControlName="category" class="form-select">
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+      </select>
+    </div>
+
+    <!-- Unified Search with Informative Message -->
+    <div class="mb-3">
+      <label for="unifiedSearch" class="form-label">Unified Search:</label>
+      <input id="unifiedSearch" type="text" class="form-control" (input)="onUnifiedSearch($event)"
+        [attr.placeholder]="getUnifiedSearchPlaceholder()">
+    </div>
+
+    <!-- Search Users by Name -->
+    <div class="mb-3">
+      <label for="search" class="form-label">Search Users by Name:</label>
+      <input id="search" type="text" class="form-control" (input)="onSearch($event)">
+    </div>
+
+    <!-- Unified Search Results -->
+    <div *ngIf="unifiedSearchResults">
+      <!-- Projects Section -->
+      <div *ngIf="unifiedSearchResults.projects.length > 0">
+        <h4>Projects</h4>
+        <ul class="list-group">
+          <li *ngFor="let project of unifiedSearchResults.projects" class="list-group-item d-flex justify-content-between align-items-center">
+            {{ project.nameP }}
+            <button class="btn btn-success btn-sm" (click)="onSelectResult(project, 'PROJECT')">
+              <i class="fas fa-plus"></i>
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="unifiedSearchInitiated && unifiedSearchResults.projects.length === 0">
+        <p>No projects associated found.</p>
+      </div>
+
+      <!-- Teams Section -->
+      <div *ngIf="unifiedSearchResults.teams.length > 0">
+        <h4>Teams</h4>
+        <ul class="list-group">
+          <li *ngFor="let team of unifiedSearchResults.teams" class="list-group-item d-flex justify-content-between align-items-center">
+            {{ team.nameT }} 
+            <button class="btn btn-success btn-sm" (click)="onSelectResult(team, 'TEAM')">
+              <i class="fas fa-plus"></i>
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="unifiedSearchInitiated && unifiedSearchResults.teams.length === 0">
+        <p>No teams associated found.</p>
+      </div>
+
+      <!-- Tickets Section -->
+      <div *ngIf="unifiedSearchResults.tickets.length > 0">
+        <h4>Tickets</h4>
+        <ul class="list-group">
+          <li *ngFor="let ticket of unifiedSearchResults.tickets" class="list-group-item d-flex justify-content-between align-items-center">
+            {{ ticket.title }}
+            <button class="btn btn-success btn-sm" (click)="onSelectResult(ticket, 'TICKET')">
+              <i class="fas fa-plus"></i>
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="unifiedSearchInitiated && unifiedSearchResults.tickets.length === 0">
+        <p>No tickets associated found.</p>
+      </div>
+    </div>
+
+    <!-- User Search Results -->
+    <div *ngIf="searchResults.length > 0">
+      <ul class="list-group">
+        <li *ngFor="let user of searchResults" class="list-group-item d-flex justify-content-between align-items-center">
+          {{ user.username }}
+          <button class="btn btn-success btn-sm" (click)="onSelectUser(user)">
+            <i class="fas fa-plus"></i>
+          </button>
+        </li>
+      </ul>
+      <div *ngIf="searchInitiated && searchResults.length === 0">
+        <p>No users found for the selected event and unified search result.</p>
+      </div>
+    </div>
+
+    <!-- Selected Users -->
+    <div class="mb-3">
+      <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let user of selectedUsers">
+          {{ user.username }}
+          <button class="btn btn-danger btn-sm" (click)="removeSelectedUser(user)">
+            <i class="fas fa-times"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Enable Button -->
+    <div class="mb-3 text-center">
+      <button type="button" class="btn btn-primary btn-rounded" (click)="toggleNotificationEnabled()">
+        {{ notificationForm.value.enabled ? '✓' : '✗' }}
+      </button>
+    </div>
+
+    <!-- Create Notification Button -->
+    <button type="button" class="btn btn-success mt-3" (click)="sendNotification()">Create Notification</button>
+  </form>
+</div>

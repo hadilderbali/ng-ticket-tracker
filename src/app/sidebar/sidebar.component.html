@@ -1,0 +1,32 @@
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-light border-end" id="sidebar-wrapper">
+      <div class="list-group list-group-flush">
+        <a href="#" class="list-group-item list-group-item-action list-group-item-light p-3">
+          <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action list-group-item-light p-3">
+          <a class="nav-link" routerLink="/projectList">Projects</a>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action list-group-item-light p-3">
+          <a class="nav-link" routerLink="/ticketList">Tickets</a>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action list-group-item-light p-3">
+          <a class="nav-link" routerLink="/teams">Teams</a>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action list-group-item-light p-3">
+          <a class="nav-link" routerLink="/notificationList">Notification</a>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action list-group-item-light p-3">
+          <a class="nav-link" routerLink="/reports">Reports</a>
+        </a>
+      </div>
+    </div>
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <router-outlet></router-outlet> <!-- Angular routing outlet -->
+      </div>
+    </div>
+  </div>
+  

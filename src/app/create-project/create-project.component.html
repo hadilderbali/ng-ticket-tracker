@@ -1,0 +1,70 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <!-- Form to create a new project -->
+      <div class="col-lg-6">
+        <div class="card" style="width: 600px;">
+          <div class="card-header bg-primary text-white">
+            <h2 class="mb-0">Create Project</h2>
+          </div>
+          <div class="card-body">
+            <!-- Success Message -->
+            <div *ngIf="successMessage" class="alert alert-success" role="alert">
+              {{ successMessage }}
+            </div>
+            <!-- Error Message -->
+            <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+              {{ errorMessage }}
+            </div>
+  
+            <form (ngSubmit)="createProject()" #projectForm="ngForm">
+              <div class="form-group">
+                <label for="name">Project Name:</label>
+                <input type="text" id="name" [(ngModel)]="project.nameP" name="name" class="form-control form-control-lg" required #name="ngModel">
+                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
+                  Project Name is required.
+                </div>
+              </div>
+  
+              <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" [(ngModel)]="project.description" name="description" class="form-control form-control-lg" rows="6" required #description="ngModel"></textarea>
+                <div *ngIf="description.invalid && (description.dirty || description.touched)" class="text-danger">
+                  Description is required.
+                </div>
+              </div>
+  
+              <button type="submit" class="btn btn-primary btn-lg mt-3 w-100" [disabled]="projectForm.invalid">Create Project</button>
+            </form>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Display the created project -->
+      <div class="col-lg-6" *ngIf="project.id">
+        <div class="card" style="width: 600px;">
+          <div class="card-header bg-success text-white">
+            <h3>Created Project Details</h3>
+          </div>
+          <div class="card-body">
+            <p><strong>Project Name:</strong> {{ project.nameP }}</p>
+            <p><strong>Description:</strong> {{ project.description }}</p>
+            <p><strong>Created Date:</strong> {{ project.createdDate }}</p>
+     
+            <!-- Display associated teams if any, else show a message -->
+            <div>
+              <h4>Teams:</h4>
+              <ul *ngIf="project.teams?.length; else noTeamsMessage">
+                <li *ngFor="let team of project.teams">
+                  {{ team.nameT }}
+                </li>
+              </ul>
+              <ng-template #noTeamsMessage>
+                <p>Still not assigned to a team.</p>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
