@@ -1,51 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Title</title>
+    <link href="/assets/BackOffice/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="/assets/BackOffice/css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        .table th, .table td {
+            vertical-align: middle; /* Align content vertically in cells */
+        }
+        .table th {
+            padding-top: 10px; /* Adjust top padding of table headers */
+            padding-bottom: 10px; /* Adjust bottom padding of table headers */
+        }
+        .table td {
+            padding-top: 8px; /* Adjust top padding of table cells */
+            padding-bottom: 8px; /* Adjust bottom padding of table cells */
+        }
+        .actions-btns button {
+            margin: 0 5px; /* Add margin between buttons */
+        }
+    </style>
+</head>
+
+<body id="page-top">
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+<app-sidebar></app-sidebar>        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+<app-navbar></app-navbar>
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!-- Your Angular router outlet -->
+                    <router-outlet></router-outlet>
 <div class="container">
   <!-- Instructional Message -->
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <h2>Charts Overview</h2>
   <div class="row mb-4">
     <div class="col-md-12">
       <p class="instructional-message">Please select a date range to view the charts for the specified week:</p>
     </div>
   </div>
 
-  <!-- Date Range Inputs -->
+  <!-- Date Inputs -->
   <div class="row mb-4">
-    <div class="col-md-6">
-      <label for="startDate">Start Date</label>
-      <input type="date" id="startDate" [(ngModel)]="selectedStartDate" class="form-control" (change)="onDateChange()" />
-    </div>
-    <div class="col-md-6">
-      <label for="endDate">End Date</label>
-      <input type="date" id="endDate" [(ngModel)]="selectedEndDate" class="form-control" (change)="onDateChange()" />
+    <div class="col-md-12">
+      <div class="date-picker-container">
+        <div class="row">
+          <div class="col-md-6">
+            <label for="startDate">Start Date</label>
+            <input type="datetime-local" id="startDate" [(ngModel)]="selectedStartDate" class="form-control" (change)="onDateChange()" />
+          </div>
+          <div class="col-md-6">
+            <label for="endDate">End Date</label>
+            <input type="datetime-local" id="endDate" [(ngModel)]="selectedEndDate" class="form-control" (change)="onDateChange()" />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Charts Container -->
-  <div class="row mb-4">
-    <div class="col-md-12">
-      <h2>Charts Overview</h2>
+  
       <div class="chart-container">
+        <!-- Status Distribution Chart -->
         <div class="chart chart-doughnut">
           <h3 class="chart-title">Ticket Status Distribution</h3>
           <canvas id="statusDistributionChart" class="chart-canvas"></canvas>
         </div>
+        
+        <!-- User Workload Chart -->
         <div class="chart chart-bar">
-          <h3 class="chart-title">User Capacity and Workload</h3>
-          <canvas id="userCapacityAndWorkloadChart" class="chart-canvas"></canvas>
+          <h3 class="chart-title">User Workload</h3>
+          <canvas id="userWorkloadChart" class="chart-canvas"></canvas>
           <div class="chart-info">
-            <p><strong>Capacity Formula:</strong></p>
-            <p>Percentage of Capacity = (Total Tickets / Capacity) * 100</p>
-            <p>Workload per Day = Total Ticket Duration / Total Days</p>
-            <p>Remaining Capacity = Total Capacity - Workload</p>
-          </div>
-        </div>
-        <div class="chart chart-bar">
-          <h3 class="chart-title">Average Ticket Duration Resolution</h3>
-          <canvas id="averageDurationChart" class="chart-canvas"></canvas>
-          <div class="chart-info">
-            <p><strong>Average Duration Formula:</strong></p>
-            <p>Average Duration = (Total Duration of Resolved Tickets) / (Number of Resolved Tickets)</p>
+            <p><strong>Workload Formula:</strong></p>
+            <p>Workload = Total Workload / Total Days</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

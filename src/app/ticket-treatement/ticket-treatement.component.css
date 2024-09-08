@@ -1,0 +1,29 @@
+.container {
+    padding: 20px;
+  }
+  
+  .ticket-card,
+  .treatment-card {
+    margin-bottom: 20px;
+  }
+  
+  .add-comment {
+    margin-top: 20px;
+  }
+  
+  .comments-section {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .list-group-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .comment-date {
+    font-size: 0.9em;
+    color: #666;
+  }
+  

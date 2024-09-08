@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from '../model/Project';
 import { ProjectService } from '../services/project.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project-list',
@@ -15,7 +16,7 @@ export class ProjectListComponent  implements OnInit {
   totalPages: number = 0;
   totalPagesArray: number[] = [];
 
-  constructor(private projectService: ProjectService) {}
+  constructor(private projectService: ProjectService,private router:Router) {}
 
   ngOnInit(): void {
     this.projectService.getAllProjects().subscribe(
@@ -45,4 +46,9 @@ export class ProjectListComponent  implements OnInit {
       this.updatePagedProjects();
     }
   }
+
+  navigateToProject():void {
+    this.router.navigate(['/createProject']);
+  }
+
 }

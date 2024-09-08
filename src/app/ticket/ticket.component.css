@@ -1,0 +1,31 @@
+/* Centering the container on the page and adding frame */
+.container {
+    max-width: 800px; /* Adjust the width as needed */
+    margin: 0 auto; /* Centers the container horizontally */
+    padding: 30px; /* Adds padding inside the container */
+    border: 2px solid #ddd; /* Adds a light gray border */
+    border-radius: 10px; /* Optional: rounds the corners of the border */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
+    background-color: #fff; /* Optional: sets a white background */
+    position: relative; /* For positioning the icon */
+  }
+  
+  .container h2 {
+    text-align: center; /* Centers the header text */
+    margin-bottom: 20px; /* Adds space below the header */
+  }
+  
+  /* Style for the icon */
+  .icon-container {
+    position: absolute;
+    right: 20px; /* Adjust the position from the right edge */
+    top: 20px; /* Adjust the position from the top edge */
+    font-size: 24px; /* Adjust icon size as needed */
+    cursor: pointer; /* Indicates that it's clickable */
+    color: #007bff; /* Optional: sets the color for the icon */
+  }
+  
+  .icon-container:hover {
+    color: #0056b3; /* Optional: changes color on hover */
+  }
+  

@@ -1,0 +1,102 @@
+<div class="container">
+  <br>
+  <br>
+<br>
+<br>
+<br>
+  
+  <h1>Welcome to Your Ticket Tracker</h1>
+  <p>Here are your tasks:</p>
+
+  <!-- Table view -->
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Assigned User</th>
+          <th>Capacity</th>
+          <th>Created Date</th>
+          <th>Deadline</th>
+          <th>Attachment</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ticket of tickets">
+          <td>{{ ticket.title }}</td>
+          <td>{{ ticket.description }}</td>
+          <td>{{ getUserName(ticket.assignedUser) }}</td>
+          <td>{{ getUserCapacity(ticket.assignedUser) }} hours</td>
+          <td>{{ formatDateString(ticket.dateS) | date:'yyyy/MM/dd HH:mm:ss' }}</td>
+          <td>{{ (formatDateString(ticket.deadline) | date:'yyyy/MM/dd HH:mm:ss') || 'No Deadline' }}</td>
+          <td>
+            <a *ngIf="ticket.attachmentPath" (click)="downloadAttachment(ticket.attachmentPath)" class="btn btn-link">
+              View Attachment
+            </a>
+            <span *ngIf="!ticket.attachmentPath">No Attachment</span>
+          </td>
+          <td>
+            <button (click)="treatTicket(ticket.id)" class="btn btn-primary">Treat</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Trello-like Card View -->
+  <div class="card-sections">
+    <div class="card-section">
+      <h3>Done</h3>
+      <div class="card-container">
+        <div class="card done" *ngFor="let ticket of doneTickets">
+          <div class="card-header">
+            <h5>{{ ticket.title }}</h5>
+            <span class="badge">Done</span>
+          </div>
+          <div class="card-body">
+            <p><strong>Assigned Date:</strong> {{ formatDateString(ticket.dateS) | date: 'yyyy/MM/dd HH:mm:ss' }}</p>
+            <p><strong>CompletedDate:</strong>{{ formatDateString(ticket.dateF) | date: 'yyyy/MM/dd HH:mm:ss'  }}</p>
+            <p><strong>Deadline:</strong> {{ (formatDateString(ticket.deadline) | date: 'yyyy/MM/dd HH:mm:ss') || 'No Deadline' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-section">
+      <h3>Doing</h3>
+      <div class="card-container">
+        <div class="card in-progress" *ngFor="let ticket of inProgressTickets">
+          <div class="card-header">
+            <h5>{{ ticket.title }}</h5>
+            <span class="badge">In Progress</span>
+          </div>
+          <div class="card-body">
+            <p><strong>Assigned Date:</strong> {{ formatDateString(ticket.dateS) | date: 'yyyy/MM/dd HH:mm:ss' }}</p>
+            <p><strong>Completed Date:</strong>{{ formatDateString(ticket.dateF) | date: 'yyyy/MM/dd HH:mm:ss'|| '_' }}</p>
+
+            <p><strong>Deadline:</strong> {{ (formatDateString(ticket.deadline) | date: 'yyyy/MM/dd HH:mm:ss') || 'No Deadline' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-section">
+      <h3>To Do</h3>
+      <div class="card-container">
+        <div class="card to-do" *ngFor="let ticket of toDoTickets">
+          <div class="card-header">
+            <h5>{{ ticket.title }}</h5>
+            <span class="badge">To Do</span>
+          </div>
+          <div class="card-body">
+            <p><strong>Assigned Date:</strong> {{ formatDateString(ticket.dateS) | date: 'yyyy/MM/dd HH:mm:ss' }}</p>
+            <p><strong>Completed Date:</strong>{{ formatDateString(ticket.dateF) | date: 'yyyy/MM/dd HH:mm:ss' ||'_'}}</p>
+            <p><strong>Deadline:</strong> {{ (formatDateString(ticket.deadline) | date: 'yyyy/MM/dd HH:mm:ss') || 'No Deadline' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

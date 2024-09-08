@@ -9,7 +9,7 @@ import { Project } from '../model/Project';
   templateUrl: './set-team.component.html',
   styleUrls: ['./set-team.component.css']
 })
-export class SetTeamComponent  implements OnInit {
+export class SetTeamComponent implements OnInit {
   projectId!: number;
   project!: Project;
   teams: Team[] = [];
@@ -21,6 +21,7 @@ export class SetTeamComponent  implements OnInit {
     private route: ActivatedRoute,
     private projectService: ProjectService
   ) { }
+
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const projectIdStr = params.get('projectId');
@@ -31,6 +32,12 @@ export class SetTeamComponent  implements OnInit {
         this.projectService.getProject(this.projectId).subscribe(project => {
           this.project = project;
         });
+
+        // Fetch all teams and initialize filteredTeams
+        this.projectService.getAllTeams().subscribe(teams => {
+          this.teams = teams;
+          this.filteredTeams = teams; // Initialize the filtered list
+        });
       } else {
         console.error('Project ID is null');
       }
@@ -39,11 +46,11 @@ export class SetTeamComponent  implements OnInit {
 
   onSearchTeam(): void {
     if (this.searchQuery.trim()) {
-      this.projectService.searchTeamsByName(this.searchQuery).subscribe(teams => {
-        this.filteredTeams = teams;
-      });
+      this.filteredTeams = this.teams.filter(team =>
+        team.nameT.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
     } else {
-      this.filteredTeams = [];
+      this.filteredTeams = this.teams;
     }
   }
 

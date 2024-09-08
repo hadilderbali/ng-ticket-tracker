@@ -1,32 +1,79 @@
-<div class="d-flex" id="wrapper">
-    <!-- Sidebar -->
-    <div class="bg-light border-end" id="sidebar-wrapper">
-      <div class="list-group list-group-flush">
-        <a href="#" class="list-group-item list-group-item-action list-group-item-light p-3">
-          <a class="nav-link" routerLink="/dashboard">Dashboard</a>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action list-group-item-light p-3">
-          <a class="nav-link" routerLink="/projectList">Projects</a>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action list-group-item-light p-3">
-          <a class="nav-link" routerLink="/ticketList">Tickets</a>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action list-group-item-light p-3">
-          <a class="nav-link" routerLink="/teams">Teams</a>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action list-group-item-light p-3">
-          <a class="nav-link" routerLink="/notificationList">Notification</a>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action list-group-item-light p-3">
-          <a class="nav-link" routerLink="/reports">Reports</a>
-        </a>
-      </div>
+<!-- Sidebar -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css" rel="stylesheet">
+
+<ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: linear-gradient(to bottom, #8B0000, #4B0082);">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        
+            <i class="bi bi-house-gear-fill"></i>
+        
+        <div class="sidebar-brand-text mx-3">AIM TaskTracker </div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item active">
+        <a class="nav-link" href="dashboard">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Management
     </div>
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-      <div class="container-fluid">
-        <router-outlet></router-outlet> <!-- Angular routing outlet -->
-      </div>
-    </div>
-  </div>
+
+    
+    <!-- Nav Item - Pages Collapse Menu -->
+    
+    <li class="nav-item">
+        <a class="nav-link" href="user">
+            <i class="bi bi-people"></i>
+                        <span>User Management</span></a>
+    </li>
+
+    <!-- Nav Item - Tables -->
+    <li class="nav-item">
+        <a class="nav-link" href="projectList">
+            <i class="bi bi-camera-reels"></i>
+            <span>Project Management</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="ticketList">
+            <i class="bi bi-pencil-square"></i>
+            <span>Ticket Management</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="tables.html">
+            <i class="bi bi-calendar2-event"></i>
+            <span>Event Management</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="teams">
+            <i class="bi bi-award-fill"></i>
+            <span>Team Management</span></a>
+   
+    <li class="nav-item">
+        <a class="nav-link" href="notificationList">
+            <i class="bi bi-exclamation-octagon"></i>
+            <span>Notification Management</span></a>
   
+  
+    
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+    <!-- Sidebar Message -->
+</ul>
+<!-- End of Sidebar -->

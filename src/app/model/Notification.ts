@@ -1,25 +1,17 @@
+import { User } from "./User";
+
 export class Notification{
     idN!: number;
     description!: string;
     date!: Date;
     notification_read!: boolean;
     enabled!: boolean;
-    eventType!: EventType; 
     category!: Category; 
+    users?: User[];
 }
-export enum EventType{
-    TICKET_CREATED="TICKET_CREATED",
-    TICKET_ASSIGNED="TICKET_ASSIGNED",
-    TICKET_COMPLETED="TICKET_COMPLETED",
-    PROJECT_ASSIGNED="PROJECT_ASSIGNED",
-    PROJECT_UPDATED="PROJECT_UPDATED ",
-    USER_ASSIGNED_TO_TEAM="USER_ASSIGNED_TO_TEAM",
 
-
-
-}
 export enum Category{
-    INFO = 'INFO',
+    INFORMATIONAL = 'INFORMATIONAL',
     WARNING = 'WARNING',
     ERROR = 'ERROR',
     SUCCESS = 'SUCCESS',

@@ -4,7 +4,7 @@ import { NotificationRequest } from '../model/NotificationRequest';
 import { Observable } from 'rxjs';
 import { User } from '../model/User';
 import { UnifiedSearchResponse } from '../model/UnifiedSearchResponse';
-import { Notification } from '../model/Notification';
+import { Category, Notification } from '../model/Notification';
 
 @Injectable({
   providedIn: 'root'
@@ -50,11 +50,14 @@ getSentNotifications(): Observable<any[]> {
   return this.http.get<any[]>(`${this.apiUrl}notifications/sent`);
 }
 
-enableNotification(id: number, userIds: number[]): Observable<any> {
-  return this.http.post<any>(`${this.apiUrl}notifications/${id}/enable`, userIds);
+enableNotification(id: number): Observable<string> {
+  return this.http.put<string>(`${this.apiUrl}notifications/enable/${id}`, {});
 }
 
-getNotificationsByCategory(category: string): Observable<Notification[]> {
+getNotificationsByCategory(category: Category): Observable<Notification[]> {
   return this.http.get<Notification[]>(`${this.apiUrl}notifications/category/${category}`);
+}
+resendNotification(notificationId: number): Observable<any> {
+  return this.http.post(`${this.apiUrl}notifications/resendNotification`, { id: notificationId });
 }
 }

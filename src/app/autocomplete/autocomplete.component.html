@@ -1,0 +1,14 @@
+<div class="autocomplete">
+    <input 
+      type="text" 
+      (input)="onInput($event)" 
+      (blur)="onBlur()" 
+      class="form-control" 
+    />
+    <ul *ngIf="showSuggestions" class="suggestions-list">
+      <li *ngFor="let suggestion of filteredSuggestions" (mousedown)="onSelectSuggestion(suggestion)">
+        {{ suggestion }}
+      </li>
+    </ul>
+  </div>
+  

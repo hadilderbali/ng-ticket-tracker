@@ -82,4 +82,8 @@
   .text-muted {
     color: #6c757d;
   }
-  
+  /* notification.component.css */
+textarea#description {
+  width: 100%; /* Makes the textarea full width of its container */
+  height: 120px; /* Adjust the height as needed */
+}

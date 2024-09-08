@@ -1,48 +1,111 @@
-<div class="container">
-  <h2>Create Ticket</h2>
-  <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
-    <div class="mb-3">
-      <label for="title" class="form-label">Title</label>
-      <input type="text" id="title" class="form-control" formControlName="title">
-      <div *ngIf="ticketForm.controls['title'].invalid && (ticketForm.controls['title'].dirty || ticketForm.controls['title'].touched)">
-        <div *ngIf="ticketForm.controls['title'].errors?.['required']">
-          Title is required.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Ticket</title>
+</head>
+
+<body>
+  <!-- Centering the Form -->
+  <div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="container" style="max-width: 600px;">
+      <h2 class="text-center">Create Ticket</h2>
+      <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" id="title" class="form-control" formControlName="title">
+          <div *ngIf="ticketForm.controls['title'].invalid && (ticketForm.controls['title'].dirty || ticketForm.controls['title'].touched)" class="text-danger">
+            <div *ngIf="ticketForm.controls['title'].errors?.['required']">
+              Title is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea id="description" class="form-control" formControlName="description" rows="3"></textarea>
+          <div *ngIf="ticketForm.controls['description'].invalid && (ticketForm.controls['description'].dirty || ticketForm.controls['description'].touched)" class="text-danger">
+            <div *ngIf="ticketForm.controls['description'].errors?.['required']">
+              Description is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="projectId" class="form-label">Project</label>
+          <select id="projectId" class="form-control" formControlName="projectId">
+            <option *ngFor="let project of projects" [value]="project.id">{{ project.nameP }}</option>
+          </select>
+          <div *ngIf="ticketForm.controls['projectId'].invalid && (ticketForm.controls['projectId'].dirty || ticketForm.controls['projectId'].touched)" class="text-danger">
+            <div *ngIf="ticketForm.controls['projectId'].errors?.['required']">
+              Project is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="duration" class="form-label">Duration (in hours)</label>
+          <input type="number" id="duration" class="form-control" formControlName="duration">
+          <div *ngIf="ticketForm.controls['duration'].invalid && (ticketForm.controls['duration'].dirty || ticketForm.controls['duration'].touched)" class="text-danger">
+            <div *ngIf="ticketForm.controls['duration'].errors?.['required']">
+              Duration is required.
+            </div>
+          </div>
+        </div>
+
+        <!-- Event Selection with Icon -->
+        <div class="mb-3">
+          <label for="eventId" class="form-label">Event</label>
+          <div class="input-group">
+            <select id="eventId" class="form-control" formControlName="eventId">
+              <option *ngFor="let event of events" [value]="event.id">{{ event.name }}</option>
+            </select>
+            <!-- Icon button beside the event select -->
+            <button type="button" class="btn btn-outline-secondary" (click)="openEventModal()">
+              <i class="fas fa-plus-circle"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- File Attachment -->
+        <div class="mb-3">
+          <label for="attachment" class="form-label">Attachment</label>
+          <input type="file" id="attachment" class="form-control" (change)="onFileChange($event)">
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100" [disabled]="ticketForm.invalid">Create Ticket</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Event Modal -->
+  <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="eventModalLabel">Add Event</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="handleEventCreated(eventForm.value)" #eventForm="ngForm">
+            <div class="mb-3">
+              <label for="eventName" class="form-label">Event Name</label>
+              <input type="text" id="eventName" class="form-control" [(ngModel)]="newEvent.name" name="name" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="eventTimestamp" class="form-label">Event Date</label>
+              <input type="datetime-local" id="eventTimestamp" class="form-control" [(ngModel)]="newEvent.dateEvent" name="dateEvent" required>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="eventForm.invalid">Add Event</button>
+          </form>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="mb-3">
-      <label for="description" class="form-label">Description</label>
-      <textarea id="description" class="form-control" formControlName="description" rows="3"></textarea>
-      <div *ngIf="ticketForm.controls['description'].invalid && (ticketForm.controls['description'].dirty || ticketForm.controls['description'].touched)">
-        <div *ngIf="ticketForm.controls['description'].errors?.['required']">
-          Description is required.
-        </div>
-      </div>
-    </div>
+</body>
 
-    <div class="mb-3">
-      <label for="projectId" class="form-label">Project</label>
-      <select id="projectId" class="form-control" formControlName="projectId">
-        <option *ngFor="let project of projects" [value]="project.id">{{ project.nameP }}</option>
-      </select>
-      <div *ngIf="ticketForm.controls['projectId'].invalid && (ticketForm.controls['projectId'].dirty || ticketForm.controls['projectId'].touched)">
-        <div *ngIf="ticketForm.controls['projectId'].errors?.['required']">
-          Project is required.
-        </div>
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <label for="duration" class="form-label">Duration (in hours)</label>
-      <input type="number" id="duration" class="form-control" formControlName="duration">
-      <div *ngIf="ticketForm.controls['duration'].invalid && (ticketForm.controls['duration'].dirty || ticketForm.controls['duration'].touched)">
-        <div *ngIf="ticketForm.controls['duration'].errors?.['required']">
-          Duration is required.
-        </div>
-      </div>
-    </div>
-
-    <button type="submit" class="btn btn-primary" [disabled]="ticketForm.invalid">Create Ticket</button>
-  </form>
-</div>
+</html>

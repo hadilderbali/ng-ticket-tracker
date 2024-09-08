@@ -1,0 +1,98 @@
+
+
+<div class="container">
+  <!-- Ticket Details Card -->
+   <br>
+   <br>
+   <br>
+   <br>
+    <br>
+  <mat-card class="ticket-card">
+    <mat-card-header>
+      <mat-card-title>Ticket Details</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="ticket">
+        <h2>{{ ticket.title }}</h2>
+        <p><strong>Description:</strong> {{ ticket.description }}</p>
+        <p><strong>Start Date:</strong> {{ formatDateString(ticket.dateS) }}</p>
+        <p><strong>Deadline:</strong> {{ formatDateString(ticket.deadline) || 'No Deadline' }}</p>
+        <p><strong>Status:</strong> {{ ticket.status }}</p>
+        <p><strong>Project:</strong> {{ ticket.project.nameP }}</p>
+        <p>
+          <a *ngIf="ticket.attachmentPath" [href]="ticket.attachmentPath" target="_blank">
+            View Attachment
+          </a>
+          <span *ngIf="!ticket.attachmentPath">No Attachment</span>
+        </p>
+        
+        <!-- Show Comments Button -->
+        <button mat-button (click)="toggleComments()">
+          {{ showComments ? 'Hide Comments' : 'Show Comments' }}
+        </button>
+
+        <!-- Comments Section -->
+        <!-- Comments Section -->
+<div *ngIf="showComments">
+  <mat-card class="comments-section">
+    <mat-card-content>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let comment of ticket.comments">
+          <p><strong>{{ comment.authorName || 'Anonymous' }}:</strong> {{ comment.content }}</p>
+          <p class="comment-date">{{ formatDateString(comment.createdDate) }}</p>
+        </li>
+      </ul>
+      <div *ngIf="ticket && ticket.comments.length === 0">
+        <p>No comments yet.</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+  <!-- Ticket Treatment Card -->
+  <mat-card class="treatment-card">
+    <mat-card-header>
+      <mat-card-title>Ticket Treatment</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <!-- Update Status Form -->
+      <form [formGroup]="statusForm" (ngSubmit)="updateStatus()">
+        <mat-form-field appearance="fill">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status">
+            <mat-option *ngFor="let option of statusOptions" [value]="option">{{ option }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Update Status</button>
+      </form>
+
+      <!-- Add Comment Form -->
+      <div class="add-comment">
+        <h3>Add Comment</h3>
+        <form [formGroup]="commentForm" (ngSubmit)="addComment()">
+          <mat-form-field appearance="fill">
+            <mat-label>Comment</mat-label>
+            <textarea matInput formControlName="comment" rows="4"></textarea>
+          </mat-form-field>
+          <button mat-raised-button color="accent" type="submit">Add Comment</button>
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+<!-- File Upload Form -->
+<!-- File Upload Form -->
+<mat-card class="file-upload-card">
+  <mat-card-header>
+    <mat-card-title>Upload File</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="fileForm" (ngSubmit)="uploadFile()">
+      <div>
+        <input type="file" (change)="onFileChange($event)" />
+      </div>
+      <button mat-raised-button color="primary" type="submit">Upload File</button>
+    </form>
+  </mat-card-content>
+</mat-card>

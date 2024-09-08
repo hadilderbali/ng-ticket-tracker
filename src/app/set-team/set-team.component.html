@@ -1,47 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Title</title>
+    <link href="/assets/BackOffice/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="/assets/BackOffice/css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        .table th, .table td {
+            vertical-align: middle; /* Align content vertically in cells */
+        }
+        .table th {
+            padding-top: 10px; /* Adjust top padding of table headers */
+            padding-bottom: 10px; /* Adjust bottom padding of table headers */
+        }
+        .table td {
+            padding-top: 8px; /* Adjust top padding of table cells */
+            padding-bottom: 8px; /* Adjust bottom padding of table cells */
+        }
+        .actions-btns button {
+            margin: 0 5px; /* Add margin between buttons */
+        }
+    </style>
+</head>
+
+<body id="page-top">
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+<app-sidebar ></app-sidebar>        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+<app-navbar></app-navbar>
+
 <div class="set-team-container">
-    <h2>Affect Team to Project</h2>
-  
-    <!-- Project Details Card -->
-    <div class="card project-details-card">
-      <h3>Project Details</h3>
-      <p><strong>Project Name:</strong> {{ project.nameP }}</p>
-      <p><strong>Description:</strong> {{ project.description }}</p>
-      <p><strong>Created Date:</strong> {{ project.createdDate | date:'medium' }}</p>
-    </div>
-  
-    <!-- Search Teams -->
-    <div class="search-team-section">
-      <label for="team-search">Search Team:</label>
-      <input type="text" id="team-search" [(ngModel)]="searchQuery" (input)="onSearchTeam()" placeholder="Enter team name">
-    </div>
-  
-    <!-- Teams List -->
-    <div class="teams-list">
-      <div *ngFor="let team of filteredTeams" class="card team-card" (click)="selectTeam(team)">
-        <p><strong>Team Name:</strong> {{ team.nameT }}</p>
-        <p><strong>Members:</strong> {{ team.membreInteger }}</p>
-      </div>
-    </div>
-  
-    <!-- Selected Team Details Card -->
-    <div *ngIf="selectedTeam" class="card selected-team-details-card">
-      <h3>Selected Team Details</h3>
-      <p><strong>Team Name:</strong> {{ selectedTeam.nameT }}</p>
-      <p><strong>Members:</strong> {{ selectedTeam.membreInteger }}</p>
-      
-      <!-- Users associated with the selected team -->
-      <div *ngIf="selectedTeam.users && selectedTeam.users.length > 0">
-        <h4>Team Members:</h4>
-        <ul>
-          <li *ngFor="let user of selectedTeam.users">
-            <p><strong>User Name:</strong>  {{ user.username }}</p>
-            <p><strong>User mail:</strong>  {{ user.usermail}}</p>
-            
-          </li>
-        </ul>
-      </div>
-  
-      <button class="btn btn-primary" (click)="affectTeamToProject()">Affect Team</button>
+  <h2>Affect Team to Project</h2>
+
+  <!-- Project Details Card -->
+  <div class="card project-details-card">
+    <h3>Project Details</h3>
+    <p><strong>Project Name:</strong> {{ project.nameP }}</p>
+    <p><strong>Description:</strong> {{ project.description }}</p>
+    <p><strong>Created Date:</strong> {{ project.createdDate | date:'medium' }}</p>
+  </div>
+
+  <!-- Search Teams -->
+  <div class="search-team-section">
+    <label for="team-search">Search Team:</label>
+    <input type="text" id="team-search" [(ngModel)]="searchQuery" (input)="onSearchTeam()" placeholder="Enter team name">
+  </div>
+
+  <!-- Teams List -->
+  <div class="teams-list">
+    <div *ngFor="let team of filteredTeams" class="card team-card" (click)="selectTeam(team)">
+      <p><strong>Team Name:</strong> {{ team.nameT }}</p>
+      <p><strong>Members:</strong> {{ team.membreInteger }}</p>
     </div>
   </div>
-  
+
+  <!-- Selected Team Details Card -->
+  <div *ngIf="selectedTeam" class="card selected-team-details-card">
+    <h3>Selected Team Details</h3>
+    <p><strong>Team Name:</strong> {{ selectedTeam.nameT }}</p>
+    <p><strong>Members:</strong> {{ selectedTeam.membreInteger }}</p>
+
+    <!-- Users associated with the selected team -->
+    <div *ngIf="selectedTeam.users && selectedTeam.users.length > 0">
+      <h4>Team Members:</h4>
+      <ul>
+        <li *ngFor="let user of selectedTeam.users">
+          <p><strong>User Name:</strong>  {{ user.username }}</p>
+          <p><strong>User Mail:</strong>  {{ user.usermail }}</p>
+        </li>
+      </ul>
+    </div>
+
+    <button class="btn btn-primary" (click)="affectTeamToProject()">Affect Team</button>
+  </div>
+</div>

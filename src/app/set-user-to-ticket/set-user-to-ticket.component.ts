@@ -13,7 +13,8 @@ export class SetUserToTicketComponent implements OnInit {
   ticket?: Ticket;
   availableUsers: User[] = [];
   successMessage: string = '';
-  selectedUserId?: number;
+  selectedUsernames : string[] = [];;
+  deadline: string | null = null; // Updated to string
 
   constructor(
     private route: ActivatedRoute,
@@ -46,19 +47,35 @@ export class SetUserToTicketComponent implements OnInit {
     });
   }
 
-  assignUser(): void {
-    if (this.ticket && this.selectedUserId) {
-      this.ticketService.assignTicketToUser(this.ticket.id, this.selectedUserId).subscribe(() => {
-        this.successMessage = 'User assigned successfully';
-        this.router.navigate(['/ticketList']);
-
-      }, error => {
-        console.error('Error assigning user:', error);
-        this.successMessage = 'Failed to assign user';
-      });
-    } else {
-      console.error('Ticket or user ID is missing');
-    }
+// set-user-to-ticket.component.ts
+assignUsers(): void {
+  if (this.ticket && this.selectedUsernames && this.selectedUsernames.length > 0 && this.deadline) {
+    this.ticketService.assignTicket(this.ticket.id, this.selectedUsernames, this.deadline).subscribe(() => {
+      this.successMessage = 'Users and deadline assigned successfully';
+      this.router.navigate(['/ticketList']);
+    }, error => {
+      console.error('Error assigning users:', error);
+      this.successMessage = 'Failed to assign users';
+    });
+  } else {
+    console.error('Ticket, usernames, or deadline are missing');
   }
-  
 }
+
+downloadAttachment(filePath: string): void {
+    this.ticketService.getFile(filePath).subscribe(
+        (fileBlob: Blob) => {
+            const url = window.URL.createObjectURL(fileBlob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filePath.substring(filePath.lastIndexOf('/') + 1);  // Extract file name for download
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        },
+        error => {
+            console.error('Error downloading file:', error);
+        }
+    );
+  }}

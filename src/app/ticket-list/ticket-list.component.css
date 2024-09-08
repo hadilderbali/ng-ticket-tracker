@@ -41,3 +41,53 @@
   color: #495057; /* Adjust as needed */
   font-size: 1.25rem; /* Adjust font size for emoji */
 }
+.container-fluid {
+  display: flex;
+  gap: 20px; /* Space between the comments section and the table */
+}
+
+
+
+.table {
+  margin-right: 20px; /* Add space to the right of the table */
+
+}
+
+.comments-section {
+  margin-left: 30px; /* Add space to the left of the comments */
+
+  width: 300px; /* Adjust width as needed */
+  box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Optional: Add shadow for better separation */
+  overflow-y: auto; /* Scroll if content exceeds height */
+}
+
+.comment {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.comment strong {
+  font-weight: bold;
+}
+
+.comment small {
+  display: block;
+  color: #888;
+}
+.btn-show-logs {
+  font-size: 0.875rem; /* Smaller font size */
+  padding: 0.25rem 0.5rem; /* Reduced padding */
+  border-radius: 0.25rem; /* Rounded corners */
+}
+
+.btn-show-logs .btn-info {
+  background-color: #17a2b8; /* Bootstrap info color */
+  border-color: #17a2b8; /* Matching border color */
+}
+
+.btn-show-logs:hover {
+  background-color: #138496; /* Darker shade on hover */
+  border-color: #117a8b; /* Matching border color */
+}

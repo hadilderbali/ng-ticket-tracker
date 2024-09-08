@@ -15,13 +15,29 @@ import { TeamListComponent } from './team-list/team-list.component';
 import { TeamDetailsComponent } from './team-details/team-details.component';
 import { CreateTeamComponent } from './create-team/create-team.component';
 import { SetUserToTicketComponent } from './set-user-to-ticket/set-user-to-ticket.component';
+import { TicketUserComponent } from './ticket-user/ticket-user.component';
+import { TicketTreatementComponent } from './ticket-treatement/ticket-treatement.component';
+import { LayoutComponent } from './layout/layout.component';
+import { AboutComponent } from './about/about.component';
+import { LogsComponent } from './logs/logs.component';
+import { UserComponent } from './user/user.component';
 
 
 const routes: Routes = [
- 
+  {
+    path: '', component: LayoutComponent, children: [
+      { path: 'ticketByUser', component: TicketUserComponent },
+      { path: 'ticket-treatment/:ticketId', component: TicketTreatementComponent},
+       {path: 'home', component: HomeComponent
+       },
+       {path: 'About', component: AboutComponent
+       },
+       {path: '', component: HomeComponent},
+
+    ]
+  }, 
   { path: 'affect-user/:ticketId', component: SetUserToTicketComponent },
   {path:'notification',component:NotificationComponent},
-  {path:'',component:DashboardComponent},
   {path:'createTicket',component:TicketComponent},
   {path:'dashboard',component:DashboardComponent},
   {path:'notificationList',component:NotificationListComponent},
@@ -32,6 +48,12 @@ const routes: Routes = [
   { path: 'teams', component: TeamListComponent },
 { path: 'team-details/:teamId',component:TeamDetailsComponent},
 {path:'createTeam',component:CreateTeamComponent},
+{path:'ticketByUser',component:TicketUserComponent},
+{path:'ticket-treatment/:ticketId',component:TicketTreatementComponent},
+{path:'',component:DashboardComponent},
+{path:'logs/:ticketId',component:LogsComponent},
+{path:'user',component:UserComponent}
+
 
 ];
 

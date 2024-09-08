@@ -9,13 +9,27 @@
   margin-bottom: 20px;
 }
 
+/* Styling for instructional message */
+.instructional-message {
+  font-size: 1rem; /* Font size for the instructional message */
+  color: #333; /* Dark grey color for readability */
+  margin-bottom: 20px; /* Space below the message */
+}
+
+/* Date picker container to match chart width */
+.date-picker-container {
+  max-width: 600px; /* Match the max-width of the charts */
+  margin: 0 auto; /* Center align the container */
+}
+
 /* Styling for date range inputs */
-input[type="date"] {
-  width: 100%;
+.date-picker-container input[type="datetime-local"] {
+  width: 100%; /* Make the input take the full width of its container */
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  margin-bottom: 10px; /* Space between date pickers */
 }
 
 /* Styling for chart headers */
@@ -25,30 +39,6 @@ h2 {
 }
 
 /* Styling for chart canvases to ensure they fit well */
-canvas {
-  display: block; /* Ensure canvas is block-level to control size */
-  width: 100% !important; /* Use percentage width to fit parent container */
-  height: auto !important; /* Maintain aspect ratio */
-  max-width: 600px; /* Set max-width for medium size */
-  margin: 0 auto; /* Center the canvas */
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-/* Optional: Add styling for chart info */
-.chart-info {
-  font-size: 0.9em;
-  color: #555;
-  margin-top: 10px;
-}
-
-@media (max-width: 768px) {
-  /* Stack columns vertically on smaller screens */
-  .col-md-12 {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-}
 .chart-container {
   display: flex;
   flex-wrap: wrap;
@@ -56,17 +46,13 @@ canvas {
 }
 
 .chart {
-  flex: 1 1 30%; /* Flex-grow, flex-shrink, and flex-basis */
+  flex: 1 1 45%; /* Flex-grow, flex-shrink, and flex-basis */
   margin: 10px;
   text-align: center;
 }
 
-.chart-doughnut {
-  flex: 1 1 30%; /* Keep the doughnut charts the same width */
-}
-
-.chart-bar {
-  flex: 1 1 45%; /* Make the bar charts wider */
+.chart-doughnut, .chart-bar {
+  max-width: 600px; /* Ensure charts have a maximum width */
 }
 
 .chart-canvas {
@@ -81,23 +67,9 @@ canvas {
   margin-bottom: 10px; /* Space below titles */
 }
 
-
+/* Optional: Add styling for chart info */
 .chart-info {
-  margin-top: 10px; /* Adds space between the chart and the formula */
-  font-size: 0.9em; /* Adjust font size as needed */
-}
-
-#chart-info {
-  margin-top: 20px;
-}
-
-.chart-title {
-  color: grey; /* Change color to grey */
-  font-size: 1.2rem; /* Reduce the font size */
-  margin-bottom: 10px; /* Add some space below the title */
-}
-.instructional-message {
-  font-size: 1rem; /* Font size for the instructional message */
-  color: #333; /* Dark grey color for readability */
-  margin-bottom: 20px; /* Space below the message */
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 10px;
 }

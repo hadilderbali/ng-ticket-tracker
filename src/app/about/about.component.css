@@ -1,0 +1,107 @@
+.about-container {
+    padding: 20px;
+  }
+  
+  .about-hero-section {
+    background: url('/assets/about-hero-bg.jpg') no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    padding: 80px 20px;
+    text-align: center;
+  }
+  
+  .about-hero-text h1 {
+    font-size: 3em;
+  }
+  
+  .about-hero-text p {
+    font-size: 1.2em;
+  }
+  
+  .about-info {
+    padding: 40px 20px;
+  }
+  
+  .about-section {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .about-section h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  .about-section p {
+    font-size: 1.1em;
+  }
+  
+  .icon-container {
+    margin-bottom: 20px;
+  }
+  
+  .mission-icon, .vision-icon {
+    font-size: 100px;
+    color: #007bff;
+  }
+  
+  .about-team {
+    padding: 40px 20px;
+    background-color: #f8f9fa;
+  }
+  
+  .about-team h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .team-member {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .team-icon {
+    font-size: 100px;
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+  
+  .team-member h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .team-member p {
+    font-size: 1.1em;
+  }
+  
+  .about-contact {
+    padding: 40px 20px;
+  }
+  
+  .contact-info h3, .contact-form h3 {
+    margin-bottom: 15px;
+  }
+  
+  .contact-info ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .contact-info li {
+    margin-bottom: 10px;
+  }
+  
+  .contact-form .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  

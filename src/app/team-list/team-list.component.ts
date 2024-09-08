@@ -22,6 +22,8 @@ project!: Project;
   loadTeams(): void {
     this.projectService.getAllTeams().subscribe(
       (teams: Team[]) => {
+        console.log('API response:', teams); // Log the entire response
+
         this.teams = teams;
       },
       (error) => {

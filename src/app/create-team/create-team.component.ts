@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
 import { User } from '../model/User';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-team',
@@ -19,7 +20,7 @@ export class CreateTeamComponent implements OnInit {
   allUsers: User[] = []; // This will store all users fetched from the server
   successMessage: string = ''; // Variable to store success message
 
-  constructor(private teamService: ProjectService) { }
+  constructor(private teamService: ProjectService,private router:Router) { }
 
   ngOnInit(): void {
     this.filteredUsers = this.users;
@@ -56,6 +57,7 @@ export class CreateTeamComponent implements OnInit {
           this.successMessage = 'Team created successfully!';
           form.reset(); // Optionally reset the form after submission
           this.filteredUsers = []; // Clear search results
+          this.router.navigate(['/teamList']);
         },
         error => {
           // Handle error case

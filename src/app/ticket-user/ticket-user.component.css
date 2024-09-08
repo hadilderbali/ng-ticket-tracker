@@ -1,0 +1,70 @@
+/* ticket-user.component.css */
+
+.card-sections {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .card-section {
+    width: 30%;
+  }
+  
+  .card-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  
+  .card-body {
+    font-size: 0.9em;
+  }
+  
+  .card-body p {
+    margin: 4px 0;
+  }
+  
+  .done {
+    background-color: #d4edda;
+  }
+  
+  .in-progress {
+    background-color: #fff3cd;
+  }
+  
+  .to-do {
+    background-color: #f8d7da;
+  }
+  
+  .badge {
+    padding: 4px 8px;
+    font-size: 0.75em;
+    color: #fff;
+    border-radius: 4px;
+  }
+  
+  .done .badge {
+    background-color: #28a745; /* Green */
+  }
+  
+  .in-progress .badge {
+    background-color: #ffc107; /* Yellow */
+  }
+  
+  .to-do .badge {
+    background-color: #dc3545; /* Red */
+  }
+  

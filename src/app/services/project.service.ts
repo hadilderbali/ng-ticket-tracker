@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Project } from '../model/Project';
 import { Observable } from 'rxjs';
@@ -14,9 +14,9 @@ export class ProjectService {
 
 
   createProject(project: Project): Observable<Project> {
-    return this.http.post<Project>(`${this.baseUrl}Project/createProject`, project);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<Project>(`${this.baseUrl}Project/createProject`, project, { headers });
   }
-
   getAllProjects(): Observable<Project[]> {
     return this.http.get<Project[]>(`${this.baseUrl}Project/getProject`);
   }
@@ -50,5 +50,15 @@ searchUsersByName(name: string): Observable<User[]> {
     params: { name }
   });
 }
+
+getUser(id: number): Observable<User> {
+  return this.http.get<User>(`${this.baseUrl}Project/getUser/${id}`);
+
+}
+
+getAllUsers(): Observable<any[]> {
+  return this.http.get<any[]>(`${this.baseUrl}Project/user`);
+}
+
 }
 

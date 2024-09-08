@@ -1,0 +1,47 @@
+/* Header background color and text color */
+header {
+    background-color: #343a40; /* Dark color for header */
+    color: #f8f9fa; /* Light text color for contrast */
+    padding: 20px; /* Increase padding for a longer header */
+    display: flex;
+    justify-content: center; /* Center-align header content */
+    align-items: center;
+    position: fixed; /* Keep header fixed at the top */
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure header is on top */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for better separation */
+  }
+  
+  /* Header content alignment */
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; /* Center-align with max-width */
+  }
+  
+  /* Header logo */
+  .header-logo img {
+    height: 60px; /* Adjust height for logo */
+  }
+  
+  /* Navigation styles */
+  nav {
+    display: flex;
+  }
+  
+  nav a {
+    color: #f8f9fa; /* Light color for links */
+    text-decoration: none;
+    margin: 0 20px;
+    font-size: 18px; /* Adjust font size */
+    transition: color 0.3s ease; /* Smooth transition for color change */
+  }
+  
+  nav a:hover {
+    color: #adb5bd; /* Light grey color on hover */
+  }
+  

@@ -1,0 +1,57 @@
+.home-container {
+    padding: 20px;
+  }
+  
+  .hero-section {
+    background: url('/assets/hero-bg.jpg') no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    padding: 100px 20px;
+    text-align: center;
+  }
+  
+  .hero-text {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .hero-text h1 {
+    font-size: 3em;
+  }
+  
+  .hero-text p {
+    font-size: 1.2em;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .features {
+    padding: 40px 20px;
+    text-align: center;
+  }
+  
+  .feature {
+    margin-bottom: 20px;
+  }
+  
+  .feature-icon {
+    font-size: 3em;
+    margin-bottom: 10px;
+  }
+  
+  .feature h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  .feature p {
+    font-size: 1.1em;
+  }
+  

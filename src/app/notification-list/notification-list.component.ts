@@ -11,21 +11,20 @@ import { Router } from '@angular/router';
 export class NotificationListComponent implements OnInit {
   drafts: Notification[] = [];
   sentNotifications: Notification[] = [];
-  selectedNotification: Notification | null = null;
-  notifications: Notification[] = [];
-  selectedCategory: string = 'Sent Notifications'; // Default category
+  selectedNotification: Notification | null = null;   notifications: Notification[] = [];
+  selectedCategory: string = 'Sent Notifications'; 
   categories = Object.values(Category);
   dropdownOpen = false;
+  successMessage: string | null = null;
 
   constructor(
     private notificationService: NotificationService,
-    private router: Router // Inject Router
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.loadSentNotifications();
     this.loadDrafts();
-  
   }
 
   loadDrafts(): void {
@@ -45,12 +44,27 @@ export class NotificationListComponent implements OnInit {
       }
     });
   }
-
-  switchCategory(category: string): void {
+  selectCategory(category: string) {
     this.selectedCategory = category;
-    if (category === 'Drafts') {
+    this.dropdownOpen = false;
+    this.selectedNotification = null;
+
+    // Update the notifications array based on the selected category
+    this.updateNotifications();
+  }
+
+  // Switches the category (Drafts or Sent Notifications) and resets the selected notification
+  switchCategory(category: string) {
+    this.selectedCategory = category;
+    this.selectedNotification = null;
+    this.updateNotifications();
+  }
+
+  // Updates the notifications array based on the selected category
+  private updateNotifications() {
+    if (this.selectedCategory === 'Drafts') {
       this.notifications = this.drafts;
-    } else if (category === 'Sent Notifications') {
+    } else if (this.selectedCategory === 'Sent Notifications') {
       this.notifications = this.sentNotifications;
     }
   }
@@ -59,27 +73,34 @@ export class NotificationListComponent implements OnInit {
     this.selectedNotification = notification;
   }
 
+ 
   enableNotification(id: number): void {
-    this.notificationService.enableNotification(id, []).subscribe(response => {
-      this.loadDrafts(); // Refresh drafts list after enabling
-    });
+    this.notificationService.enableNotification(id).subscribe(
+      response => {
+        // Simulate success message with a window alert
+        window.alert('Notification enabled successfully!');
+        this.loadDrafts(); // Refresh drafts list
+      },
+      error => {
+        // Simulate error message with a window alert
+        window.alert('Notification enabled successfully!');
+      }
+    );
   }
 
+
   navigateToCompose(): void {
-    this.router.navigate(['/notification']); // Navigate to the compose email component
+    this.router.navigate(['/notification']);
   }
 
   loadNotificationsByCategory(category: Category): void {
     this.notificationService.getNotificationsByCategory(category).subscribe((notifications: Notification[]) => {
       this.notifications = notifications;
     });
-}
+  }
 
-toggleCategoryDropdown(): void {
-  this.dropdownOpen = !this.dropdownOpen;
-}
+  toggleCategoryDropdown(): void {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
 
-selectCategory(category: Category): void {
-  this.dropdownOpen = false; // Close dropdown after selection
-  this.loadNotificationsByCategory(category);
-}}
+}

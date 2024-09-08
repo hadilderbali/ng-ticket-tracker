@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '../model/User';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { NotificationService } from '../services/notification.service';
-import { NotificationRequest } from '../model/NotificationRequest';
-import { UnifiedSearchResult } from '../model/UnifiedSearchResult';
-import { UnifiedSearchResponse } from '../model/UnifiedSearchResponse';
+import { TicketService } from '../services/ticket.service';
+import { Ticket } from '../model/Ticket';
+import { User } from '../model/User';
+import { Category } from '../model/Notification';
+import { AppEvent } from '../model/AppEvent';
+import { Role } from '../model/Role';
 
 @Component({
   selector: 'app-notification',
@@ -12,158 +14,132 @@ import { UnifiedSearchResponse } from '../model/UnifiedSearchResponse';
   styleUrls: ['./notification.component.css']
 })
 export class NotificationComponent implements OnInit {
+  events: AppEvent[] = [];
+  roles: Role[] = [];
   notificationForm: FormGroup;
-  users: User[] = [];
-  selectedUsers: User[] = [];
-  searchResults: User[] = [];
-  unifiedSearchResults: UnifiedSearchResponse | null = null;
-  selectedResultId: number | null = null;
-  searchInitiated: boolean = false; // Flag to indicate if a search has been initiated
-  unifiedSearchInitiated = false;
+  categories = Object.values(Category);
+  message: string | null = null;
+  success: boolean = false;
+  selectedTicket?: Ticket;
+  selectedUser?: User;
+  autocompleteOptions: string[] = [];
+  filteredOptions: string[] = [];
 
-  eventTypes: string[] = ['TICKET_CREATED', 'TICKET_ASSIGNED', 'PROJECT_ASSIGNED', 'USER_ASSIGNED_TO_TEAM'];
-  categories: string[] = ['INFO', 'WARNING', 'ERROR', 'SUCCESS', 'INCIDENT', 'SERVICE_REQUEST', 'CHANGE', 'IMPROVEMENT', 'ISSUE'];
-  ticketIds: number[] = [];
-  projectIds: number[] = [];
-  teamIds: number[] = [];
-
-  constructor(private fb: FormBuilder, private notificationService: NotificationService) {
+  constructor(
+    private notificationService: NotificationService,
+    private ticketService: TicketService,
+    private fb: FormBuilder
+  ) {
     this.notificationForm = this.fb.group({
-      eventType: [''],
-      description: ['', Validators.required],
-      category: ['', Validators.required],
-      enabled: [false]
+      description: [''],
+      eventName: [''],
+      roleNames: [],
+      enabled: [false],
+      category: ['']
     });
   }
 
-  ngOnInit(): void {}
-
- 
-  onSearch(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    const searchTerm = inputElement.value;
-    if (searchTerm) {
-      this.notificationService.searchUsersByName(searchTerm).subscribe((results: User[]) => {
-        this.searchResults = results;
-      });
-    } else {
-      this.searchResults = [];
-    }
+  ngOnInit(): void {
+    this.loadEvents();
+    this.loadRoles();
   }
-
-  onSelectUser(user: User): void {
-    if (!this.selectedUsers.includes(user)) {
-      this.selectedUsers.push(user);
-    }
-  }
-  onEventTypeChange(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    const eventType = selectElement.value;
-    console.log('Selected Event Type:', eventType);
-
   
-  }
-
-  toggleUserSelection(user: User): void {
-    const index = this.selectedUsers.findIndex(u => u.userid === user.userid);
-    if (index === -1) {
-      this.selectedUsers.push(user);
-    } else {
-      this.selectedUsers.splice(index, 1);
-    }
-  }
-
-  sendNotification(): void {
-    if (this.notificationForm.invalid || this.selectedUsers.length === 0) {
-      // Handle validation errors
-      return;
-    }
-
-    const notificationRequest: NotificationRequest = {
-      description: this.notificationForm.value.description,
-      eventType: this.notificationForm.value.eventType,
-      enabled: this.notificationForm.value.enabled,
-      category: this.notificationForm.value.category,
-      userIds: this.selectedUsers.map(user => user.userid)
-    };
-
-    this.notificationService.createNotification(notificationRequest)
-      .subscribe(response => {
-        window.alert(response);  // Show success message
+  loadEvents(): void {
+    this.ticketService.getEvents().subscribe(
+      (data: AppEvent[]) => {
+        this.events = data;
       },
       error => {
-        window.alert('Failed to create ticket');  // Show error message
+        console.error('Error fetching events', error);
       }
     );
   }
-  
 
-  onUnifiedSearch(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    const searchTerm = inputElement.value;
-    
-    if (searchTerm) {
-
-      this.unifiedSearchInitiated = true; 
-
-      this.notificationService.unifiedSearch(searchTerm).subscribe((response: UnifiedSearchResponse) => {
-        this.unifiedSearchResults = response;
-        
-      });
-    } else {
-      this.unifiedSearchResults = { tickets: [], projects: [], teams: [] };
-    }
-  }
-  onSelectResult(result: any, type: string): void {
-    const eventType = this.notificationForm.value.eventType;
-    console.log('Selected Result:', result);
-    console.log('Event Type:', eventType);
-  
-    if (eventType && result.id) {
-      let projectIds: number[] = [];
-      let ticketIds: number[] = [];
-      let teamIds: number[] = [];
-  
-      // Populate the ID arrays based on the type
-      if (type === 'PROJECT') {
-        projectIds = [result.id];
-      } else if (type === 'TICKET') {
-        ticketIds = [result.id];
-      } else if (type === 'TEAM') {
-        teamIds = [result.id];
+  loadRoles(): void {
+    this.ticketService.getRoles().subscribe(
+      (data: Role[]) => {
+        this.roles = data;
+      },
+      error => {
+        console.error('Error fetching roles', error);
       }
-      this.searchInitiated = true; // Mark search as initiated
+    );
+  }
 
-  
-      this.notificationService.getUsersBasedOnSelection(eventType, projectIds, ticketIds, teamIds)
-        .subscribe(users => {
-          console.log('Fetched Users:', users);
-          this.searchResults = users;
+  onEventNameChange(): void {
+    const eventName = this.notificationForm.get('eventName')?.value;
+
+    if (eventName) {
+      this.ticketService.getTicketsByEventAndRoles(eventName).subscribe(
+        (tickets: Ticket[]) => {
+          this.autocompleteOptions = tickets.map(ticket => ticket.title);
           
-        }, error => {
-          console.error('Error fetching users:', error);
-        });
+          if (tickets.length > 0) {
+            this.selectedTicket = tickets[0];
+            this.selectedUser = tickets[0].assignedUser[0]; // Handle user as an array
+            
+            console.log('Selected Ticket:', this.selectedTicket);
+            console.log('Selected User:', this.selectedUser);
+          } else {
+            this.selectedTicket = undefined;
+            this.selectedUser = undefined;
+          }
+        },
+        error => {
+          console.error('Error fetching tickets', error);
+        }
+      );
     }
   }
-  
-  removeSelectedUser(user: User): void {
-    this.selectedUsers = this.selectedUsers.filter(u => u !== user);
+
+  onInputChange(): void {
+    const inputValue = this.notificationForm.get('description')?.value.toLowerCase() || '';
+    this.filteredOptions = this.autocompleteOptions.filter(option =>
+      option.toLowerCase().includes(inputValue)
+    );
   }
-  
+
+  onAutocompleteOptionSelected(option: string): void {
+    const description = this.createDescription(option);
+    this.notificationForm.get('description')?.setValue(description);
+    this.filteredOptions = [];
+  }
+
+  createDescription(option: string): string {
+    const ticketTitle = this.selectedTicket?.title || 'Unknown Ticket';
+    const username = this.selectedUser?.username || 'Unknown User';
+    const taskName = this.notificationForm.get('description')?.value || 'Unknown Task';
+
+    return option
+      .replace('Ticket %s is created by %s', `Ticket ${ticketTitle} is created by ${username}`)
+      .replace('Ticket %s has been updated', `Ticket ${ticketTitle} has been updated`)
+      .replace('User %s completed the task %s', `User ${username} completed the task ${taskName}`);
+  }
+
   toggleEnabled(): void {
-    const currentValue = this.notificationForm.value.enabled;
+    const currentValue = this.notificationForm.get('enabled')?.value;
     this.notificationForm.patchValue({ enabled: !currentValue });
   }
-  getUnifiedSearchPlaceholder(): string {
-    const eventType = this.notificationForm.value.eventType;
-    if (eventType) {
-      return `Search by project, title, or teams related to ${eventType}`;
-    }
-    return 'Search by project, title, or teams';
-  }
 
-  // Method to toggle the notification enabled state
-  toggleNotificationEnabled(): void {
-    this.notificationForm.patchValue({ enabled: !this.notificationForm.value.enabled });
+  onSubmit(): void {
+    if (this.notificationForm.valid) {
+      const formValue = this.notificationForm.value;
+  
+      // Regardless of the value of 'enabled', send the form data to the backend
+      this.notificationService.createNotification(formValue).subscribe(
+        response => {
+          if (formValue.enabled) {
+            this.message = 'Notification sent successfully!';
+          } else {
+            this.message = 'Draft saved successfully!';
+          }
+          this.success = true;
+        },
+        error => {
+          this.message = formValue.enabled ? 'Failed to send notification.' : 'Failed to save draft.';
+          this.success = false;
+        }
+      );
+    }
   }
-}
+}  

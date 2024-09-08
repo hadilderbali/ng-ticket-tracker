@@ -22,11 +22,28 @@ import { SetUserToTicketComponent } from './set-user-to-ticket/set-user-to-ticke
 import { TeamDetailsComponent } from './team-details/team-details.component';
 import { CreateTeamComponent } from './create-team/create-team.component';
 import { AffectUserToTicketComponent } from './affect-user-to-ticket/affect-user-to-ticket.component';
+import { AutocompleteComponent } from './autocomplete/autocomplete.component';
+import { TicketUserComponent } from './ticket-user/ticket-user.component';
+import { TicketTreatementComponent } from './ticket-treatement/ticket-treatement.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { LayoutComponent } from './layout/layout.component';
+import { AboutComponent } from './about/about.component';
+import { LogsComponent } from './logs/logs.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
- 
+  AutocompleteComponent,
     NotFoundComponent,
        NotificationComponent,
        HomeComponent,
@@ -44,7 +61,14 @@ import { AffectUserToTicketComponent } from './affect-user-to-ticket/affect-user
        TeamDetailsComponent,
        CreateTeamComponent,
        AffectUserToTicketComponent,
-   
+       TicketUserComponent,
+       TicketTreatementComponent,
+       HeaderComponent,
+       FooterComponent,
+       LayoutComponent,
+       AboutComponent,
+       LogsComponent,
+       UserComponent,
   ],
   imports: [
     
@@ -53,9 +77,16 @@ import { AffectUserToTicketComponent } from './affect-user-to-ticket/affect-user
     HttpClientModule,
    ReactiveFormsModule, 
    FormsModule,
-   NgChartsModule
-   
-    // Add other modules here if needed
+   NgChartsModule,
+   BrowserAnimationsModule,
+   MatSnackBarModule,
+   MatCardModule,
+   MatButtonModule,
+   MatFormFieldModule,
+   MatInputModule,
+   MatSelectModule,
+   MatIconModule,
+
  
     
    

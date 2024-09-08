@@ -1,60 +1,129 @@
-<!-- notification-list.component.html -->
-<div class="notification-container">
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <button (click)="navigateToCompose()" class="compose-button">
-            <i class="fas fa-plus"></i> <!-- FontAwesome icon for compose -->
-            <span>Compose</span>
-        </button>
-<br />
-        <div class="sidebar-item" 
-            (click)="switchCategory('Drafts')"
-            [class.active]="selectedCategory === 'Drafts'"
-        >
-            <i class="fas fa-inbox"></i> <!-- FontAwesome icon for drafts -->
-            <span>Drafts</span>
-        </div>
-        <div class="sidebar-item"
-            (click)="switchCategory('Sent Notifications')"
-            [class.active]="selectedCategory === 'Sent Notifications'"
-        >
-            <i class="fas fa-paper-plane"></i> <!-- FontAwesome icon for sent items -->
-            <span>Sent Notifications</span>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Title</title>
+    <link href="/assets/BackOffice/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="/assets/BackOffice/css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        .table th, .table td {
+            vertical-align: middle; /* Align content vertically in cells */
+        }
+        .table th {
+            padding-top: 10px; /* Adjust top padding of table headers */
+            padding-bottom: 10px; /* Adjust bottom padding of table headers */
+        }
+        .table td {
+            padding-top: 8px; /* Adjust top padding of table cells */
+            padding-bottom: 8px; /* Adjust bottom padding of table cells */
+        }
+        .actions-btns button {
+            margin: 0 5px; /* Add margin between buttons */
+        }
+    </style>
+</head>
+
+<body id="page-top">
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <app-sidebar></app-sidebar>
         
-        <!-- Category Dropdown -->
-        <div class="sidebar-item category-dropdown">
-            <i class="fas fa-filter"></i> <!-- FontAwesome icon for filter -->
-            <span>Categories</span>
-            <i class="fas fa-caret-down" (click)="toggleCategoryDropdown()"></i> <!-- Dropdown icon -->
-            <div *ngIf="dropdownOpen" class="dropdown-menu">
-                <div *ngFor="let category of categories" (click)="selectCategory(category)">
-                    {{ category }}
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <app-navbar></app-navbar>
+
+                <div class="notification-container">
+                    <!-- Sidebar -->
+                    <div class="sidebar">
+                        <button (click)="navigateToCompose()" class="compose-button">
+                            <i class="fas fa-plus"></i>
+                            <span>Compose</span>
+                        </button>
+                        <br />
+                        <div class="sidebar-item" (click)="switchCategory('Drafts')" [class.active]="selectedCategory === 'Drafts'">
+                            <i class="fas fa-inbox"></i>
+                            <span>Drafts</span>
+                        </div>
+                        <div class="sidebar-item" (click)="switchCategory('Sent Notifications')" [class.active]="selectedCategory === 'Sent Notifications'">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Sent Notifications</span>
+                        </div>
+
+                        <!-- Category Dropdown -->
+                        <div class="sidebar-item category-dropdown">
+                            <i class="fas fa-filter"></i>
+                            <span>Categories</span>
+                            <i class="fas fa-caret-down" (click)="toggleCategoryDropdown()"></i>
+                            <div *ngIf="dropdownOpen" class="dropdown-menu">
+                                <div *ngFor="let category of categories" (click)="selectCategory(category)">
+                                    {{ category }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Email List -->
+                    <div class="email-list">
+                        <h2>{{ selectedCategory }}</h2>
+                        <ul>
+                            <li *ngFor="let notification of notifications" (click)="selectNotification(notification)">
+                                <i class="fas fa-envelope"></i>
+                                <span>{{ notification.description }}</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Email Reading Pane -->
+                    <div class="email-reading-pane" *ngIf="selectedNotification">
+                        <div class="email-container">
+                            <!-- Email Header -->
+                            <div class="email-header">
+                                <h2>
+                                    <strong>📂 {{ selectedNotification.category }}</strong> <!-- Emoji for Category -->
+                                </h2>
+                                <p>
+                                    🗓️ {{ selectedNotification.date | date:'medium' }} <!-- Emoji for Date -->
+                                </p>
+                            </div>
+
+                            <!-- Email Details -->
+                            <div class="email-details">
+                                <!-- Displaying all users -->
+                                <p *ngIf="selectedNotification.users && selectedNotification.users.length > 0">
+                                    <strong>To:</strong>
+                                    <span *ngFor="let user of selectedNotification.users; let i = index">
+                                        👤 {{ user.username }} ({{ user.usermail }})
+                                        <span *ngIf="i < selectedNotification.users.length - 1">, </span>
+                                    </span>
+                                </p>
+                            </div>
+
+                            <!-- Email Body -->
+                            <div class="email-body">
+                                <p>{{ selectedNotification.description }}</p>
+                            </div>
+
+                            <!-- Enable Button -->
+                            <button class="enable-button" *ngIf="selectedCategory === 'Drafts' && selectedNotification" (click)="enableNotification(selectedNotification.idN)">
+                                Enable Notification
+                            </button>
+                            <p *ngIf="successMessage" class="success-message">{{ successMessage }}</p>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    <!-- Email List -->
-    <div class="email-list">
-      <h2>{{selectedCategory}}</h2>
-      <ul>
-        <li *ngFor="let notification of notifications" (click)="selectNotification(notification)">
-          <i class="fas fa-envelope"></i> <!-- Icon for each notification -->
-          <span>{{ notification.description }}</span>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Email Reading Pane -->
-    <div class="email-reading-pane" *ngIf="selectedNotification">
-      <h2>{{ selectedNotification.description }}</h2>
-      <p><strong>Date:</strong> {{ selectedNotification.date | date }}</p>
-      <p><strong>Event Type:</strong> {{ selectedNotification.eventType }}</p>
-      <p><strong>Category:</strong> {{ selectedNotification.category }}</p>
-    
-      <button *ngIf="selectedCategory === 'Drafts'" (click)="enableNotification(selectedNotification.idN)">
-        Enable Notification
-      </button>
-    </div>
-  </div>
+</body>
+</html>
