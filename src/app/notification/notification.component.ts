@@ -98,6 +98,7 @@ export class NotificationComponent implements OnInit {
       option.toLowerCase().includes(inputValue)
     );
   }
+  
 
   onAutocompleteOptionSelected(option: string): void {
     const description = this.createDescription(option);
@@ -125,7 +126,6 @@ export class NotificationComponent implements OnInit {
     if (this.notificationForm.valid) {
       const formValue = this.notificationForm.value;
   
-      // Regardless of the value of 'enabled', send the form data to the backend
       this.notificationService.createNotification(formValue).subscribe(
         response => {
           if (formValue.enabled) {
@@ -142,4 +142,4 @@ export class NotificationComponent implements OnInit {
       );
     }
   }
-}  
+}

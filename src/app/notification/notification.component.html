@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,6 +23,26 @@
         .actions-btns button {
             margin: 0 5px; /* Add margin between buttons */
         }
+        .autocomplete-container {
+            position: relative;
+        }
+        .autocomplete-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            max-height: 150px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+        .autocomplete-dropdown .list-group-item {
+            cursor: pointer;
+        }
+        .autocomplete-dropdown .list-group-item:hover {
+            background-color: #f1f1f1;
+        }
     </style>
 </head>
 
@@ -32,8 +51,9 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-<app-sidebar> </app-sidebar>
-    <!-- Content Wrapper -->
+        <app-sidebar></app-sidebar>
+
+        <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
@@ -42,88 +62,92 @@
                 <!-- Topbar -->
                 <app-navbar></app-navbar>
 
-<div class="container mt-4">
-  <h2 class="mb-4">Create and Send Notification</h2>
+                <div class="container mt-4">
+                    <h2 class="mb-4">Create and Send Notification</h2>
 
-  <!-- Notification Form -->
-  <div class="card">
-    <div class="card-header">
-      <h5>Create Notification</h5>
-    </div>
-    <div class="card-body">
-      <form [formGroup]="notificationForm" (ngSubmit)="onSubmit()">
-        
-     <!-- Description Input with Autocomplete -->
-<div class="form-group position-relative">
-  <label for="description">Description</label>
-  <textarea
-    id="description"
-    class="form-control"
-    formControlName="description"
-    rows="4"
-    (input)="onInputChange()"
-    autocomplete="off"
-  ></textarea>
-  <!-- Suggestion Dropdown -->
-  <ul *ngIf="filteredOptions.length > 0" class="list-group position-absolute">
-    <li
-      *ngFor="let option of filteredOptions"
-      class="list-group-item"
-      (click)="onAutocompleteOptionSelected(option)"
-    >
-      {{ option }}
-    </li>
-  </ul>
-</div>
+                    <!-- Notification Form -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Create Notification</h5>
+                        </div>
+                        <div class="card-body">
+                            <form [formGroup]="notificationForm" (ngSubmit)="onSubmit()">
+                                
+                                <!-- Description Input with Autocomplete -->
+                                <div class="form-group autocomplete-container">
+                                    <label for="description">Description</label>
+                                    <textarea
+                                    id="description"
+                                    class="form-control"
+                                    formControlName="description"
+                                    rows="4"
+                                    (input)="onInputChange()"
+                                    autocomplete="off"
+                                  ></textarea>
+                                  
+                                    <!-- Suggestion Dropdown -->
+                                    <ul *ngIf="filteredOptions.length > 0" class="list-group autocomplete-dropdown">
+                                        <li
+                                            *ngFor="let option of filteredOptions"
+                                            class="list-group-item"
+                                            (click)="onAutocompleteOptionSelected(option)"
+                                        >
+                                            {{ option }}
+                                        </li>
+                                    </ul>
+                                </div>
 
-        <!-- Event Selection -->
-        <div class="form-group">
-          <label for="eventName">Event Type</label>
-          <select id="eventName" class="form-control" formControlName="eventName" (change)="onEventNameChange()" required>
-            <option *ngFor="let event of events" [value]="event.name">{{ event.name }}</option>
-          </select>
+                                <!-- Event Selection -->
+                                <div class="form-group">
+                                    <label for="eventName">Event Type</label>
+                                    <select id="eventName" class="form-control" formControlName="eventName" (change)="onEventNameChange()" required>
+                                        <option *ngFor="let event of events" [value]="event.name">{{ event.name }}</option>
+                                    </select>
+                                </div>
+
+                                <!-- Role Selection -->
+                                <div class="form-group">
+                                    <label for="roleNames">Roles</label>
+                                    <select id="roleNames" class="form-control" formControlName="roleNames" multiple>
+                                        <option *ngFor="let role of roles" [value]="role.name">{{ role.name }}</option>
+                                    </select>
+                                </div>
+
+                                <!-- Category Selection -->
+                                <div class="form-group">
+                                    <label for="category">Category</label>
+                                    <select id="category" class="form-control" formControlName="category" required>
+                                        <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+                                    </select>
+                                </div>
+
+                                <!-- Enabled Toggle -->
+                                <div class="form-group">
+                                    <label for="enabled">Enable Notification</label>
+                                    <div class="custom-control custom-switch">
+                                        <input 
+                                            type="checkbox" 
+                                            class="custom-control-input" 
+                                            id="enabled" 
+                                            formControlName="enabled">
+                                        <label class="custom-control-label" for="enabled">Toggle to enable/disable</label>
+                                    </div>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <button type="submit" class="btn btn-primary">Send Notification</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Success/Error Message -->
+                    <div *ngIf="message" class="alert mt-4" [ngClass]="{'alert-success': success, 'alert-danger': !success}">
+                        {{ message }}
+                    </div>
+                </div>
+            </div>
         </div>
-
-     <!-- Role Selection -->
-<div class="form-group">
-  <label for="roleNames">Roles</label>
-  <select id="roleNames" class="form-control" formControlName="roleNames" multiple>
-    <option *ngFor="let role of roles" [value]="role.name">{{ role.name }}</option>
-  </select>
-</div>
-
-
-        <!-- Category Selection -->
-        <div class="form-group">
-          <label for="category">Category</label>
-          <select id="category" class="form-control" formControlName="category" required>
-            <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
-          </select>
-        </div>
-
-      
-       <!-- Enabled Toggle -->
-<div class="form-group">
-  <label for="enabled">Enable Notification</label>
-  <div class="custom-control custom-switch">
-    <input 
-      type="checkbox" 
-      class="custom-control-input" 
-      id="enabled" 
-      formControlName="enabled">
-    <label class="custom-control-label" for="enabled">Toggle to enable/disable</label>
-  </div>
-</div>
-
-
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary">Send Notification</button>
-      </form>
     </div>
-  </div>
+</body>
 
-  <!-- Success/Error Message -->
-  <div *ngIf="message" class="alert mt-4" [ngClass]="{'alert-success': success, 'alert-danger': !success}">
-    {{ message }}
-  </div>
-</div>
+</html>

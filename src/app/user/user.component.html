@@ -47,10 +47,10 @@
         <tr>
           <th>ID</th>
           <th>Username</th>
-          <th>Last Name</th>
           <th>Email</th>
           <th> Phone Number</th>
           <th>  Capacity</th>
+
 
           <!-- Add other user fields as needed -->
         </tr>
@@ -59,10 +59,10 @@
         <tr *ngFor="let user of users">
           <td>{{ user.userid }}</td>
           <td>{{ user.username }}</td>
-          <td>{{ user.userlastname }}</td>
           <td>{{ user.usermail }}</td>
           <td>{{ user.usertel }}</td> <!-- Ensure this matches the backend field name -->
           <td>{{ user.capacity }}</td>
+          
 
         </tr>
       </tbody>

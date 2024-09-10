@@ -29,17 +29,28 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     this.selectedStartDate = this.formatDate(pastDate);
     this.selectedEndDate = this.formatDate(now);
-
-    // Data and options for user workload chart
     this.userWorkloadChartOptions = {
       responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          min: 0, // Minimum Y-axis value
+          max: 100, // Adjust this value based on the expected workload range in hours
+          ticks: {
+            stepSize: 5, // The interval between ticks, adjust as needed
+            callback: function(value) {
+              return value + 'h'; // Append 'h' for hours
+            }
+          }
+        }
+      },
       plugins: {
         legend: {
           display: true,
         },
       },
     };
-
+    
     this.userWorkloadData = {
       labels: [], // Usernames
       datasets: [
@@ -138,10 +149,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   transformUserWorkloadData(data: Record<string, any>): { username: string, workload: number, capacity: number }[] {
     return Object.entries(data).map(([username, details]) => ({
       username,
-      workload: details.totalHoursWorked, // Adjust this if the property name is different
-      capacity: details.capacity // Adjust this if the property name is different
+      workload: details.totalHoursWorked, // Verify that this is in hours and not in a smaller unit like minutes or seconds
+      capacity: details.capacity // Ensure capacity is in hours
     }));
   }
+  
   
   
   

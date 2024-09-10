@@ -57,7 +57,6 @@
       <p><strong>Created Date:</strong> {{ ticket.createdDate | date:'medium' }}</p>
       <p><strong>Start Date:</strong> {{ ticket.dateS | date:'medium' }}</p>
       <p><strong>End Date:</strong> {{ ticket.dateF | date:'medium' }}</p>
-      <p><strong>Duration:</strong> {{ ticket.duration }} hours</p>
       
       <!-- Attachment Section -->
       <div *ngIf="ticket.attachmentPath">

@@ -26,7 +26,6 @@ export class TicketComponent implements OnInit {
       title: ['', Validators.required],
       description: ['', Validators.required],
       projectId: ['', Validators.required],
-      duration: [null, Validators.required],
       eventId: ['']
     });
   }
@@ -74,7 +73,6 @@ export class TicketComponent implements OnInit {
       formData.append('title', title);
       formData.append('description', description);
       formData.append('projectId', projectId);
-      formData.append('duration', duration);
       if (eventId) {
         formData.append('existingEventId', eventId.toString());
       }

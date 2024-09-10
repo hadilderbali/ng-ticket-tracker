@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,6 +23,12 @@
         .actions-btns button {
             margin: 0 5px; /* Add margin between buttons */
         }
+        .chart-info p {
+            margin: 0;
+        }
+        .chart-info {
+            margin-top: 20px;
+        }
     </style>
 </head>
 
@@ -32,70 +37,78 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-<app-sidebar></app-sidebar>        <!-- Content Wrapper -->
+        <app-sidebar></app-sidebar>        
+
+        <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
             <div id="content">
 
                 <!-- Topbar -->
-<app-navbar></app-navbar>
+                <app-navbar></app-navbar>
+
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Your Angular router outlet -->
                     <router-outlet></router-outlet>
-<div class="container">
-  <!-- Instructional Message -->
-  <div class="row mb-4">
-    <div class="col-md-12">
-      <h2>Charts Overview</h2>
-  <div class="row mb-4">
-    <div class="col-md-12">
-      <p class="instructional-message">Please select a date range to view the charts for the specified week:</p>
-    </div>
-  </div>
+                    <div class="container">
+                        <!-- Instructional Message -->
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <h2>Charts Overview</h2>
+                               
 
-  <!-- Date Inputs -->
-  <div class="row mb-4">
-    <div class="col-md-12">
-      <div class="date-picker-container">
-        <div class="row">
-          <div class="col-md-6">
-            <label for="startDate">Start Date</label>
-            <input type="datetime-local" id="startDate" [(ngModel)]="selectedStartDate" class="form-control" (change)="onDateChange()" />
-          </div>
-          <div class="col-md-6">
-            <label for="endDate">End Date</label>
-            <input type="datetime-local" id="endDate" [(ngModel)]="selectedEndDate" class="form-control" (change)="onDateChange()" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+                                <!-- Charts Container -->
+                                <div class="chart-container">
+                                    <!-- Status Distribution Chart -->
+                                    <div class="chart chart-doughnut">
+                                        <h3 class="chart-title">Ticket Status Distribution</h3>
+                                        <canvas id="statusDistributionChart" class="chart-canvas"></canvas>
+                                    </div>
+                                    
+                                    <!-- User Workload Chart -->
+                                    <div class="chart chart-bar">
+                                        <h3 class="chart-title">User Workload</h3>
+                                        <canvas id="userWorkloadChart" class="chart-canvas"></canvas>
+                                        <div class="chart-info">
+                                            <p><strong>Workload Formula:</strong></p>
+                                            <p>Workload = Sum of Duration of Work for Each Ticket</p>
+                                            <p><strong>Duration Formula:</strong></p>
+                                            <p>Duration = End Date - Start Date</p>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                      <div class="col-md-12">
+                          <p class="instructional-message">Please select a date range to view the status chart for the specified week:</p>
+                      </div>
+                  </div>
 
-  <!-- Charts Container -->
-  
-      <div class="chart-container">
-        <!-- Status Distribution Chart -->
-        <div class="chart chart-doughnut">
-          <h3 class="chart-title">Ticket Status Distribution</h3>
-          <canvas id="statusDistributionChart" class="chart-canvas"></canvas>
-        </div>
-        
-        <!-- User Workload Chart -->
-        <div class="chart chart-bar">
-          <h3 class="chart-title">User Workload</h3>
-          <canvas id="userWorkloadChart" class="chart-canvas"></canvas>
-          <div class="chart-info">
-            <p><strong>Workload Formula:</strong></p>
-            <p>Workload = Total Workload / Total Days</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
+                  <!-- Date Inputs -->
+                  <div class="row mb-4">
+                      <div class="col-md-12">
+                          <div class="date-picker-container">
+                              <div class="row">
+                                  <div class="col-md-6">
+                                      <label for="startDate">Start Date</label>
+                                      <input type="datetime-local" id="startDate" [(ngModel)]="selectedStartDate" class="form-control" (change)="onDateChange()" />
+                                  </div>
+                                  <div class="col-md-6">
+                                      <label for="endDate">End Date</label>
+                                      <input type="datetime-local" id="endDate" [(ngModel)]="selectedEndDate" class="form-control" (change)="onDateChange()" />
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
             </div>
         </div>
     </div>

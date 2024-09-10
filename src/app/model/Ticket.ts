@@ -10,7 +10,6 @@ export interface Ticket {
     dateS: string; // ISO 8601 string representation
     deadline:string;
     dateF: string | null; // ISO 8601 string representation or null
-    duration: number; 
     assignedUser: User[] ;  
      attachmentPath: string;
        frontOfficeAttachmentPath:string;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
+import { Role } from '../model/Role';
 
 @Component({
   selector: 'app-user',
@@ -8,6 +9,7 @@ import { ProjectService } from '../services/project.service';
 })
 export class UserComponent implements OnInit {
   users: any[] = [];
+  role!:Role;
 
   constructor(private projectService : ProjectService) { }
 
